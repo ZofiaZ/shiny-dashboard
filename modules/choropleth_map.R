@@ -10,8 +10,8 @@ choroplethMap <- function(input, output, session, metric) {
   countries <- geojsonio::geojson_read("data/countries.geojson", what = "sp")
   
   # Create a color palette for the map:
-  mapPalette <- colorBin( palette="Greens", domain=countries@data[[metric]], 4, na.color="transparent", pretty=FALSE)
-  
+  mapPalette <- colorBin(palette= colorRampPalette(c( "#e0e2e4","#f8d84d"))(4), domain=countries@data[[metric]], 4, na.color="transparent", pretty=FALSE)
+
   # Prepare the text for tooltips:
   tooltip <- paste(
     "Country: ", countries@data$ADMIN,"<br/>", 
