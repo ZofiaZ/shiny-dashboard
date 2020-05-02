@@ -1,13 +1,9 @@
 /* All media-queries should use em values, 
   as we want a consistent scaling for zoom and increased browser font-size functionalities.
   Due to Safari bugs rem's cannot be used */
-@mixin mediaFrom($media) {
-  @if $media == tablet {
-    @media only screen and (min-width: em($breakTablet)) {
-      @content;
-    }
-  } @else if $media == desktop {
-    @media only screen and (min-width: em($breakDesktop)) {
+@mixin mediaFrom($breakpoint) {
+  @if $breakpoint {
+    @media only screen and (min-width: em($breakpoint)) {
       @content;
     }
   }
@@ -20,13 +16,46 @@
   padding-left: rem(15px);
   padding-right: rem(15px);
 
-  @include mediaFrom(tablet) {
+  @include mediaFrom($breakMd) {
     padding-left: rem(25px);
     padding-right: rem(25px);
   }
 
-  @include mediaFrom(desktop) {
+  @include mediaFrom($breakXl) {
     padding-left: rem(50px);
     padding-right: rem(50px);
+  }
+}
+
+@mixin gridWidth($mobileWidth: "", $tabletWidth: "", $desktopWidth: "") {
+  // example usage for a component in a 12 column container:
+  // @include gridWidth(12/12, 8/12, 6/12);
+
+  @if $mobileWidth != "" {
+    width: calc(100% * #{$mobileWidth} - #{$gutterXs});
+  }
+
+  @if $tabletWidth != "" {
+    @include mediaFrom($breakSm) {
+      width: calc(100% * #{$tabletWidth} - #{$gutterXs});
+    }
+  }
+
+  @if $desktopWidth != "" {
+    @include mediaFrom($breakMd) {
+      width: calc(100% * #{$desktopWidth} - #{$gutterLg});
+    }
+  }
+}
+
+@mixin tile {
+  background: $white;
+  box-shadow: $boxShadow;
+  flex-grow: 1;
+  padding: $spacingSm;
+  margin: $gutterXs / 2;
+
+  @include mediaFrom($breakSm) {
+    padding: $spacingMd;
   }
 }

@@ -1,8 +1,32 @@
 body {
   background-color: $colorBackground;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 .page-header,
 .page-main-content {
   @include outerContainer;
+}
+
+.page-header {
+  padding-top: $spacingMd;
+  padding-bottom: $spacingMd;
+}
+
+.page-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: $gutterXs / -2;
+  margin-right: $gutterXs / -2;
 }

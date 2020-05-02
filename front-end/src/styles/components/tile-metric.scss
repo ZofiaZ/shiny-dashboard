@@ -1,0 +1,39 @@
+.tile-metric {
+  @include tile;
+  @include gridWidth(6/12, 6/12, 3/12);
+
+  span {
+    display: block;
+  }
+
+  .metric {
+    display: block;
+    font-size: rem(18px);
+    margin-bottom: rem(4px);
+
+    @include mediaFrom($breakSm) {
+      font-size: rem(22px);
+    }
+  }
+
+  .metric-bottom-row {
+    @include mediaFrom($breakSm) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .metric-label {
+    text-transform: uppercase;
+    font-size: rem(12px);
+    margin-bottom: rem(4px);
+
+    @include mediaFrom($breakSm) {
+      margin-bottom: 0;
+    }
+  }
+
+  .metric-diff {
+    font-size: rem(16px);
+  }
+}

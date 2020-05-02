@@ -1,12 +1,13 @@
 // breakpoints
-$breakTablet: 768px;
-$breakDesktop: 1024px;
+$breakSm: 576px;
+$breakMd: 768px;
+$breakLg: 992px;
+$breakXl: 1200px;
 
 // grid
 $maxContentWidth: rem(1500px);
-$gutterMobile: rem(20px);
-$gutterTablet: rem(20px);
-$gutterDesktop: rem(30px);
+$gutterXs: rem(16px);
+$gutterLg: rem(24px);
 
 // fonts
 $fontPrimary: "Maven Pro", sans-serif;
@@ -29,3 +30,10 @@ $colorOrders: $orange;
 $colorComplaints: $red;
 $colorBackground: $beigeLight;
 $colorFont: $greyDark;
+
+// box shadow
+$boxShadow: 7px 7px 7px -3px transparentize($greyDark, 0.7);
+
+// spacings
+$spacingSm: rem(8px);
+$spacingMd: rem(20px);
