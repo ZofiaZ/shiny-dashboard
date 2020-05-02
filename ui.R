@@ -1,6 +1,6 @@
 library(shiny)
 library(leaflet)
 
-ui <- fluidPage(
-  choroplethMapOutput("revenueByCountryMap")
+htmlTemplate("www/index.html", 
+  revenueByCountryMap = choroplethMapOutput("revenueByCountryMap")
 )
