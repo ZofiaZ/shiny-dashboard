@@ -30,3 +30,8 @@ html {
   margin-left: $gutterXs / -2;
   margin-right: $gutterXs / -2;
 }
+
+.subsection {
+  @include gridWidth(12/12, 6/12);
+  margin: $gutterXs / 2;
+}

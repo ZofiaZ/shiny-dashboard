@@ -1,6 +1,14 @@
 .tile-metric {
   @include tile;
   @include gridWidth(6/12, 6/12, 3/12);
+  background: $white;
+  flex-grow: 1;
+  padding: $spacingSm;
+  margin: $gutterXs / 2;
+
+  @include mediaFrom($breakSm) {
+    padding: $spacingMd;
+  }
 
   span {
     display: block;

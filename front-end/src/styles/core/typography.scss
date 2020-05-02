@@ -23,6 +23,7 @@ p {
 .page-title {
   font-size: rem(18px);
   text-align: center;
+  font-weight: 500;
 
   @include mediaFrom($breakSm) {
     text-align: left;

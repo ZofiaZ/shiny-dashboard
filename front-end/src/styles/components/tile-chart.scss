@@ -1,0 +1,20 @@
+.tile-chart {
+  @include tile;
+  margin-bottom: $spacingMd;
+
+  .tile-header {
+    background-color: $white;
+    padding: $spacingSm;
+
+    @include mediaFrom($breakSm) {
+      padding-left: $spacingMd;
+      padding-right: $spacingMd;
+    }
+  }
+
+  .tile-title {
+    font-weight: 500;
+    font-size: rem(12px);
+    text-transform: uppercase;
+  }
+}

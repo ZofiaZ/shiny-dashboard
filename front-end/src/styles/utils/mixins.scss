@@ -49,13 +49,5 @@
 }
 
 @mixin tile {
-  background: $white;
   box-shadow: $boxShadow;
-  flex-grow: 1;
-  padding: $spacingSm;
-  margin: $gutterXs / 2;
-
-  @include mediaFrom($breakSm) {
-    padding: $spacingMd;
-  }
 }
