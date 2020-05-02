@@ -1,0 +1,32 @@
+/* All media-queries should use em values, 
+  as we want a consistent scaling for zoom and increased browser font-size functionalities.
+  Due to Safari bugs rem's cannot be used */
+@mixin mediaFrom($media) {
+  @if $media == tablet {
+    @media only screen and (min-width: em($breakTablet)) {
+      @content;
+    }
+  } @else if $media == desktop {
+    @media only screen and (min-width: em($breakDesktop)) {
+      @content;
+    }
+  }
+}
+
+@mixin outerContainer {
+  max-width: $maxContentWidth;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: rem(15px);
+  padding-right: rem(15px);
+
+  @include mediaFrom(tablet) {
+    padding-left: rem(25px);
+    padding-right: rem(25px);
+  }
+
+  @include mediaFrom(desktop) {
+    padding-left: rem(50px);
+    padding-right: rem(50px);
+  }
+}

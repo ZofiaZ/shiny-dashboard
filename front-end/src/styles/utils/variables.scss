@@ -1,0 +1,31 @@
+// breakpoints
+$breakTablet: 768px;
+$breakDesktop: 1024px;
+
+// grid
+$maxContentWidth: rem(1500px);
+$gutterMobile: rem(20px);
+$gutterTablet: rem(20px);
+$gutterDesktop: rem(30px);
+
+// fonts
+$fontPrimary: "Maven Pro", sans-serif;
+
+// colors
+$white: #fff;
+$green: #bdd64b;
+$yellow: #f8d84d;
+$orange: #fe9932;
+$red: #fb5151;
+$blue: #29bed8;
+$beigeLight: #f9f9f9;
+$greyLight: #e0e2e5;
+$greyMid: #bdc2c6;
+$greyDark: #3c4043;
+
+$colorFinancial: $blue;
+$colorUsers: $yellow;
+$colorOrders: $orange;
+$colorComplaints: $red;
+$colorBackground: $beigeLight;
+$colorFont: $greyDark;

@@ -8,6 +8,7 @@
   <meta name="description" content="Enterprise Shiny Dashboard">
   {{ headContent() }}
   <link href="main.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,16 +17,39 @@
   </header>
   <main class="page-main-content">
     <section class="page-section">
-      <div class="tile metric">
-        <span></span>
+      <div class="tile tile-metric">
+        <span class="metric">$ 2 674 862</span>
+        <span class="metric-label">total profit</span>
+        <span class="metric-diff">+4.5%</span>
+      </div>
+      <div class="tile tile-metric">
+        <span class="metric">657</span>
+        <span class="metric-label">active users</span>
+        <span class="metric-diff">+8.5%</span>
+      </div>
+      <div class="tile tile-metric">
+        <span class="metric">245</span>
+        <span class="metric-label">new orders</span>
+        <span class="metric-diff">+3.9%</span>
+      </div>
+      <div class="tile tile-metric">
+        <span class="metric">12</span>
+        <span class="metric-label">open compaints</span>
+        <span class="metric-diff">-5.3%</span>
       </div>
     </section>
     <section class="page-section">
-
+      <div class="subsection">
+        <div class="tile">Lorem ipsum</div>
+        <div class="tile">Lorem ipsum</div>
+      </div>
+      <div class="subsection">
+        <div class="tile">{{ revenueByCountryMap }}</div>
+      </div>
     </section>
-    <div>{{ revenueByCountryMap }}</div>
   </main>
   <script src="bundle.js"></script>
+  <script src="http://localhost:35729/livereload.js"></script>
 </body>
 
 </html>
