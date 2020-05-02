@@ -21,6 +21,7 @@ server <- function(input, output, session) {
       addPolygons( 
         fillColor = ~revenueMapPalette(Revenue),
         stroke=FALSE, 
+        fillOpacity = 0.9,
         label = mytext,
         labelOptions = labelOptions(
           style = list("font-weight" = "normal", padding = "3px 8px"), 
