@@ -1,17 +1,26 @@
 library(lubridate)
 
 server <- function(input, output, session) {
-  orders <- read.csv("data/orders.csv", header = TRUE, stringsAsFactors = TRUE)
+  orders <-
+    read.csv("data/orders.csv",
+             header = TRUE,
+             stringsAsFactors = TRUE)
   orders$date <- ymd(orders$date)
   
-  daily_production <- read.csv("data/daily_production.csv", header = TRUE, stringsAsFactors = TRUE)
+  daily_production <-
+    read.csv("data/daily_production.csv",
+             header = TRUE,
+             stringsAsFactors = TRUE)
   daily_production$date <- ymd(daily_production$date)
   
-  output$profit <- renderText({ 
-    getProfitByDate(orders, daily_production, input$selected_year, input$selected_month)
+  output$profit <- renderText({
+    getProfitByDate(orders,
+                    daily_production,
+                    input$selected_year,
+                    input$selected_month)
   })
   
-  output$orders_count <- renderText({ 
+  output$orders_count <- renderText({
     getOrdersCountByDate(orders, input$selected_year, input$selected_month)
   })
   
@@ -23,5 +32,5 @@ server <- function(input, output, session) {
                  
                })
   
-  callModule(choroplethMap, "revenueByCountryMap", metric="Revenue")
+  callModule(choroplethMap, "revenueByCountryMap", metric = "Revenue")
 }

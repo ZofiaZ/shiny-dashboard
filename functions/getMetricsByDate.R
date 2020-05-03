@@ -1,25 +1,21 @@
-getMetricByDate <- function(df, y, m = NULL, metric, f) {
-  if (is.null(df)) {
-    stop("Data Frame argument missing")
-  }
-  
-  if (is.null(metric)) {
-    stop("Metric argument missing")
-  }
-  
-  if (is.null(y)) {
-    stop("Year argument missing")
-  }
-  
+getSubsetByDate <- function(df, y, m, metric) {
   if (is.null(m) || m == "all") {
-    values <- subset(x = df,
-                     subset = year(date) == y,
-                     select = c(metric))
+    subset(
+      x = df,
+      subset = year(date) == y,
+      select = c(metric)
+    )
   } else {
-    values <- subset(x = df,
-                     subset = year(date) == y & month(date) == m,
-                     select = c(metric))
+    subset(
+      x = df,
+      subset = year(date) == y & month(date) == m,
+      select = c(metric)
+    )
   }
+}
+
+getMetricByDate <- function(df, y, m = NULL, metric, f) {
+  values = getSubsetByDate(df, y, m, metric)
   
   if (nrow(values) == 0)
     0
