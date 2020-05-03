@@ -3,5 +3,6 @@ library(leaflet)
 
 htmlTemplate("www/index.html", 
   revenueByCountryMap = choroplethMapOutput("revenueByCountryMap"),
-  totalRevenue = textOutput("totalRevenue", inline=TRUE)
+  profit = textOutput("profit", inline=TRUE),
+  orders_count = textOutput("orders_count", inline=TRUE)
 )

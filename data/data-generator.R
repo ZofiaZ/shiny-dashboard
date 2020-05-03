@@ -1,20 +1,31 @@
-number_of_orders <- 10;
+set.seed(1)
 
-countries <- sample(x = c("United States of America", "Brazil", "Germany", "Finland", "Spain"),
-                    size = number_of_orders,
-                    replace = TRUE)
+number_of_orders <- 4000
+markets <- c("United States of America", "Brazil", "Germany", "Finland", "Spain")
+product_categories <- c("Monitoring Cameras", "Sensoric Cables", "Fence")
+business_start_date <- as.Date('2018/01/01')
+today <- as.Date(Sys.Date())
+business_running_interval <-  interval(start_date, today)
+business_running_years <- time_length(business_running_interval, "year") %>% ceiling()
+business_running_months <- time_length(business_running_interval, "month") %>% ceiling()
+business_running_days <- time_length(business_running_interval, "days") + 1;
 
-values <- sample(x = 100000:600000, size = number_of_orders)
 
-dates <- sample(seq(as.Date('2018/01/01'), as.Date('2020/05/05'), by="day"), 
-                size = number_of_orders, 
-                replace = TRUE)
 
-product_types <- sample(x = c("Monitoring Cameras", "Sensoric Cables", "Fence"),
-                       size = number_of_orders,
-                       replace = TRUE)
-
-orders <- data.frame("location" = countries, "value" = values, "date" = dates, "product_type" = product_types )
+orders <- data.frame(
+  "location" = sample(x = markets, size = number_of_orders, replace = TRUE),
+  "order_value" = sample(x = 10000:50000, size = number_of_orders),
+  "date" = sample(seq(start_date, today, by="day"),size = number_of_orders, replace = TRUE),
+  "product_type" = sample(x = product_categories, size = number_of_orders, replace = TRUE)
+)
 
 orders %>%
   write_csv("data/orders.csv")
+
+daily_production <- data.frame(
+  "date" = seq(start_date, today, by="day"),
+  "cost" = sample(x = 10:60, size = business_running_days, replace = TRUE)
+)
+
+daily_production  %>%
+  write_csv("data/daily_production.csv")
