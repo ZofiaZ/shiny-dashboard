@@ -3,24 +3,24 @@ getSubsetByDate <- function(df, y, m, metric) {
     subset(
       x = df,
       subset = year(date) == y,
-      select = c(metric)
+      select = c(metric, "date")
     )
   } else {
     subset(
       x = df,
       subset = year(date) == y & month(date) == m,
-      select = c(metric)
+      select = c(metric, "date")
     )
   }
 }
 
 getMetricByDate <- function(df, y, m = NULL, metric, f) {
-  values = getSubsetByDate(df, y, m, metric)
+  filtered_df = getSubsetByDate(df, y, m, metric)
   
-  if (nrow(values) == 0)
+  if (nrow(filtered_df) == 0)
     0
   else {
-    f(values)
+    f(filtered_df[metric])
   }
 }
 

@@ -40,7 +40,7 @@ choroplethMap <-
         setView(lat = 10,
                 lng = 0 ,
                 zoom = 2) %>%
-        addPolygons(
+        leaflet::addPolygons(
           fillColor = ~ mapPalette(countries@data[[metric]]),
           stroke = FALSE,
           fillOpacity = 0.9,
@@ -51,7 +51,7 @@ choroplethMap <-
             direction = "auto"
           )
         ) %>%
-        addLegend(
+        leaflet::addLegend(
           pal = mapPalette,
           values =  ~ countries@data[[metric]],
           opacity = 0.9,

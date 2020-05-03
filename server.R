@@ -33,4 +33,5 @@ server <- function(input, output, session) {
                })
   
   callModule(choroplethMap, "revenueByCountryMap", metric = "Revenue")
+  callModule(dygraphChart, "cost", df = daily_production, metric = "cost")
 }
