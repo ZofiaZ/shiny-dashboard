@@ -15,8 +15,10 @@
 <body>
   <header class="page-header">
     <h1 class="page-title">Enterprise Shiny Dashboard</h1>
-    {{ selectYear }}
-    {{ selectMonth }}
+    <div class="dashboard-filters">
+      {{ selectYear }}
+      {{ selectMonth }}
+    </div>
   </header>
   <main class="page-main-content">
     <section class="page-section">
@@ -55,6 +57,7 @@
           <div class="tile-header">
             <h2 class="tile-title">Production</h2>
           </div>
+          {{ costDygraph }}
         </div>
         <div class="tile-chart">
           <div class="tile-header">

@@ -1,0 +1,57 @@
+$breakInline: $breakSm;
+
+.dashboard-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-left: $gutterXs / -2;
+  margin-right: $gutterXs / -2;
+  flex-grow: 1;
+
+  @include mediaFrom($breakInline) {
+    height: rem(30px);
+  }
+
+  @include mediaFrom($breakMd) {
+    max-width: 450px;
+  }
+
+  select {
+    opacity: 0;
+  }
+
+  > .form-group {
+    @include gridWidth(6/12);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: $gutterXs / 2;
+    margin-right: $gutterXs / 2;
+
+    @include mediaFrom($breakInline) {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    > div {
+      flex-grow: 1;
+    }
+
+    label {
+      @include mediaFrom($breakInline) {
+        margin-right: $spacingMd;
+      }
+    }
+
+    .selectize-control {
+      margin-bottom: 0;
+    }
+  }
+
+  // #selected_year + .selectize-control {
+  //   width: 150px;
+  // }
+
+  // #selected_month + .selectize-control {
+  //   width: 250px;
+  // }
+}

@@ -13,14 +13,8 @@ html {
   box-sizing: inherit;
 }
 
-.page-header,
 .page-main-content {
   @include outerContainer;
-}
-
-.page-header {
-  padding-top: $spacingMd;
-  padding-bottom: $spacingMd;
 }
 
 .page-section {
