@@ -6,11 +6,7 @@ product_categories <- c("Monitoring Cameras", "Sensoric Cables", "Fence")
 business_start_date <- as.Date('2018/01/01')
 today <- as.Date(Sys.Date())
 business_running_interval <-  interval(start_date, today)
-business_running_years <- time_length(business_running_interval, "year") %>% ceiling()
-business_running_months <- time_length(business_running_interval, "month") %>% ceiling()
 business_running_days <- time_length(business_running_interval, "days") + 1;
-
-
 
 orders <- data.frame(
   "location" = sample(x = markets, size = number_of_orders, replace = TRUE),

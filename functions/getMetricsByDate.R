@@ -11,7 +11,7 @@ getMetricByDate <- function(df, y, m = NULL, metric, f) {
     stop("Year argument missing")
   }
   
-  if (is.null(m)) {
+  if (is.null(m) || m == "all") {
     values <- subset(x = df,
                      subset = year(date) == y,
                      select = c(metric))
