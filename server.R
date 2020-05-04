@@ -26,9 +26,12 @@ server <- function(input, output, session) {
   
   observeEvent(c(input$selected_year),
                {
+                 monthsChoices <- getMonthsChoices(input$selected_year)
+                 selectedMonth <- if (input$selected_month %in% monthsChoices) input$selected_month else "all"
                  updateSelectInput(session,
                                    "selected_month",
-                                   choices = getMonthsChoices(input$selected_year))
+                                   selected = selectedMonth,
+                                   choices = monthsChoices)
                })
   
   callModule(choroplethMap, "revenueByCountryMap", metric = "Revenue")
