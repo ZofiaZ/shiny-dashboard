@@ -38,7 +38,7 @@ getOrdersCountByTimeRange <- function(orders_df, y, m = NULL) {
 }
 
 getTotalProfitByTimeRange <- function(orders_df, production_df, y, m = NULL) {
-  totalRevenue <- getRevenueByTimeRange(orders_df, y, m)
+  totalRevenue <- getTotalRevenueByTimeRange(orders_df, y, m)
   totalCost <- getTotalCostByTimeRange(production_df, y, m)
   totalRevenue - totalCost
 }
