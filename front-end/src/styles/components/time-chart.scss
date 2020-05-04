@@ -1,0 +1,9 @@
+.time-chart {
+  .time-chart-container {
+    padding: 10px;
+  }
+
+  .dygraph-legend {
+    background-color: transparent !important; // overwrite dygraph inline style
+  }
+}

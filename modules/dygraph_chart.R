@@ -47,12 +47,15 @@ dygraphChart <-
       dygraph(data()) %>%
         dyBarChart() %>%
         dyAxis("y", label = "costs ($)") %>%
+        dyAxis("x", drawGrid = FALSE) %>%
         dySeries("V1", label = "costs ($)", color = "#29bed8") %>%
         dyOptions(
           includeZero = TRUE,
-          stackedGraph = TRUE,
           axisLineColor = "#585858",
-          gridLineColor = "#bdc2c6"
+          gridLineColor = "#bdc2c6",
+          axisLabelFontSize = 12,
+          axisLabelColor = "#585858",
+          disableZoom = TRUE
         )
     })
   }

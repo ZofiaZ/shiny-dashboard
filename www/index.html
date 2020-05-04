@@ -53,20 +53,22 @@
     </section>
     <section class="page-section">
       <div class="subsection">
-        <div class="tile-chart">
+        <div class="tile-chart time-chart">
           <div class="tile-header">
             <h2 class="tile-title">Production</h2>
           </div>
-          {{ costDygraph }}
+          <div class="time-chart-container">
+            {{ costDygraph }}
+          </div>
         </div>
-        <div class="tile-chart">
+        <div class="tile-chart breakdown-chart">
           <div class="tile-header">
             <h2 class="tile-title">Profit By Product Type</h2>
           </div>
         </div>
       </div>
       <div class="subsection">
-        <div class="tile-chart">
+        <div class="tile-chart map-chart">
           <div class="tile-header">
             <h2 class="tile-title">Sales Revenue By Country</h2>
           </div>
