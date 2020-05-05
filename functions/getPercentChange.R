@@ -1,13 +1,21 @@
-getPercentChangeHtml <- function(current_value, prev_value) {
-  change <- ((current_value - prev_value) / prev_value * 100) %>% round(digits = 2)
+getPercentChange <- function(current_value, prev_value) {
+  ((current_value - prev_value) / prev_value * 100) %>% round(digits = 2)
+}
+
+getPercentChangeSpan <- function(current_value, prev_value) {
+  change <- getPercentChange(current_value, prev_value)
   
   if (change > 0) {
     CSSclass <- 'positive-change'
+    sign <- '+'
   } else if (change < 0)  {
     CSSclass <- 'negative-change'
+    sign <- ''
   } else {
     CSSclass <- 'zero-change'
+    sign <- ''
   }
+
   
-  paste0("<span class='", CSSclass, "'>", ifelse(change > 0, "+", ""), change, "%</span>") %>% HTML()
+  glue("<span class='{CSSclass}'> {sign}{change}%</span>")
 }

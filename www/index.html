@@ -18,19 +18,15 @@
     <div class="dashboard-filters">
       {{ selectYear }}
       {{ selectMonth }}
-      <div class="comparison">compare with: </div>
-      {{ selectPreviousYear }}
-      {{ selectPreviousMonth }}
+      <div class="comparison">
+        {{ previousTimeRange}}
+      </div>
     </div>
   </header>
   <main class="page-main-content">
     <section class="page-section">
       <div class="tile tile-metric">
-        <span class="metric">$ {{ profit }}</span>
-        <div class="metric-bottom-row">
-          <span class="metric-label">Profit</span>
-          <span class="metric-change">{{ profitChange }}</span>
-        </div>
+        {{profitSummary}}
       </div>
       <div class="tile tile-metric">
         <span class="metric">657</span>
@@ -40,11 +36,7 @@
         </div>
       </div>
       <div class="tile tile-metric">
-        <span class="metric">{{ orders_count }}</span>
-        <div class="metric-bottom-row">
-          <span class="metric-label">new orders</span>
-          <span class="metric-change">+3.9%</span>
-        </div>
+        {{ordersCountSummary}}
       </div>
       <div class="tile tile-metric">
         <span class="metric">12</span>

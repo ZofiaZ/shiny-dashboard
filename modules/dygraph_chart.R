@@ -29,7 +29,7 @@ dygraphChart <-
     }
     
     output$dygraph <- renderDygraph({
-      if (m() == "all") {
+      if (m() == "0") {
         costs <- reactive({
           getMonthlyDataByYear(df, y(), metric)
         })

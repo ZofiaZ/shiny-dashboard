@@ -6,11 +6,11 @@ htmlTemplate(
   "www/index.html",
   selectYear = selectInput("selected_year", "Year", getYearChoices(business_start_date), width = NULL),
   selectMonth = selectInput("selected_month", "Month", getMonthsChoices(), width = NULL),
-  selectPreviousYear = selectInput("previous_year", "Year", getYearChoices(business_start_date), width = NULL),
-  selectPreviousMonth = selectInput("previous_month", "Month", getMonthsChoices(), width = NULL),
+  previousTimeRange = radioButtons("previous_time_range", label = h3("Compare to:"),
+                                   choices = list("Previous Year" = "previous_year", "Previous Month" = "previous_month"), 
+                                   selected = "previous_year"),
   revenueByCountryMap = choroplethMapOutput("revenueByCountryMap"),
-  profit = textOutput("profit", inline = TRUE),
-  profitChange = uiOutput("profitChange", inline = TRUE),
-  orders_count = textOutput("orders_count", inline = TRUE),
+  profitSummary = metricSummaryOutput("profit"),
+  ordersCountSummary = metricSummaryOutput("orders_count"),
   costDygraph = dygraphChartOutput("cost")
 )

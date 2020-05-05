@@ -3,12 +3,12 @@ getMonthsChoices <- function(year = NULL) {
   names(months) = month.name
   months_choices <- months
   
-  if (is.null(year) || year == year(today)) {
-    months_choices <- months[1:month(today)]
+  if (is.null(year) || year == year(last_day)) {
+    months_choices <- months[1:month(last_day)]
   }
-  c("All months" = "all", months_choices)
+  c("All months" = "0", months_choices)
 }
 
 getYearChoices <- function(start_date) {
-  c(year(today):year(start_date))
+  c(year(last_day):year(start_date))
 }

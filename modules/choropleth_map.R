@@ -7,7 +7,7 @@ choroplethMapOutput <- function(id) {
 }
 
 choroplethMap <-
-  function(input, output, session, metric = "Revenue") {
+  function(input, output, session, metric = "revenue") {
     countries <-
       geojsonio::geojson_read("data/countries.geojson", what = "sp")
     
