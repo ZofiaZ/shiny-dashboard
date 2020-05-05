@@ -6,42 +6,57 @@ choroplethMapOutput <- function(id) {
   leafletOutput(ns("choroplethCountryMap"))
 }
 
+getCountriesDataByDate <- function(df, y, m, metric, f = sum) {
+  getSubsetByTimeRange(df, y, m, metric=c('country', metric)) %>%
+    group_by(country) %>%
+    summarize_at(.vars = c(metric), .funs = f)
+}
+
 choroplethMap <-
-  function(input, output, session, metric = "revenue") {
-    countries <-
-      geojsonio::geojson_read("data/countries.geojson", what = "sp")
+  function(input,
+           output,
+           session,
+           metric,
+           df,
+           y,
+           m) {
     
-    # Create a color palette for the map:
-    mapPalette <-
-      colorBin(
-        palette = colorRampPalette(c("#e0e2e4", "#f8d84d"))(4),
-        domain = countries@data[[metric]],
-        4,
-        na.color = "transparent",
-        pretty = FALSE
-      )
-    
-    # Prepare the text for tooltips:
-    tooltip <- paste(
-      "Country: ",
-      countries@data$ADMIN,
-      "<br/>",
-      metric,
-      ": ",
-      countries@data[[metric]],
-      "<br/>",
-      sep = ""
-    ) %>%
-      lapply(htmltools::HTML)
-    
+    countriesDf = reactive({
+      getCountriesDataByDate(df, y(), m(), metric, sum)
+    })
+  
+  
     output$choroplethCountryMap <- renderLeaflet({
-      leaflet(countries) %>%
+      # Create a color palette for the map
+      mapPalette <-
+        colorQuantile(
+          palette = colorRampPalette(c("#f8d84d", '#bdd64b'))(6),
+          domain = countriesDf()[[metric]],
+          6,
+          na.color = "transparent"
+        )
+    
+      # Prepare the text for tooltips:
+      tooltip <- paste(
+        "Country: ",
+        countriesDf()$country,
+        "<br/>",
+        metric,
+        ": ",
+        countriesDf()[[metric]],
+        "<br/>",
+        sep = ""
+      ) %>%
+        lapply(htmltools::HTML)
+      
+      leaflet() %>%
         addTiles()  %>%
         setView(lat = 10,
                 lng = 0 ,
                 zoom = 2) %>%
         leaflet::addPolygons(
-          fillColor = ~ mapPalette(countries@data[[metric]]),
+          data = countriesGeoData,
+          fillColor = ~ mapPalette(countriesDf()[[metric]]),
           stroke = FALSE,
           fillOpacity = 0.9,
           label = tooltip,
@@ -50,13 +65,6 @@ choroplethMap <-
             textsize = "13px",
             direction = "auto"
           )
-        ) %>%
-        leaflet::addLegend(
-          pal = mapPalette,
-          values =  ~ countries@data[[metric]],
-          opacity = 0.9,
-          title = metric,
-          position = "bottomleft"
         )
     })
   }

@@ -14,25 +14,34 @@ daily_production <-
   mutate(date = ymd(date))
 
 daily_data <- orders %>%
-  mutate(date = floor_date(date, "day")) %>%
+  #mutate(date = floor_date(date, "day")) %>%
   group_by(date) %>%
   mutate(orders_count = n()) %>%
-  summarize_at(.vars = c('revenue', 'orders_count'),
-               .funs = sum) %>%
+  summarize_at(.vars = c('revenue', 'orders_count'), .funs = sum) %>%
   left_join(daily_production, by = "date") %>%
   mutate(profit = revenue - cost)
 
-data_last_day = max(daily_data$date)
+data_by_country <- orders %>% 
+  mutate(date = floor_date(date, "month")) %>%
+  group_by(country, date) %>% 
+  mutate(orders_count = n()) %>%
+  summarize_at(.vars = c('revenue', 'orders_count'), .funs = sum)
+# TODO add costs data by country
+
+countriesGeoData <-
+  geojsonio::geojson_read("data/countries.geojson", what = "sp")
+
+countriesGeoData@data <- countriesGeoData@data %>%
+  mutate(country = ADMIN)
 
 server <- function(input, output, session) {
-  # output$orders_count <- renderText({
-  #   getOrdersCountByTimeRange(orders, input$selected_year, input$selected_month)
-  # })
-  
   observeEvent(c(input$selected_year),
                {
                  monthsChoices <- getMonthsChoices(input$selected_year)
-                 selectedMonth <-ifelse(input$selected_month %in% monthsChoices, input$selected_month, "0")
+                 selectedMonth <-
+                   ifelse(input$selected_month %in% monthsChoices,
+                          input$selected_month,
+                          "0")
                  updateSelectInput(session,
                                    "selected_month",
                                    selected = selectedMonth,
@@ -42,15 +51,19 @@ server <- function(input, output, session) {
   observeEvent(c(input$selected_month),
                {
                  if (input$selected_month == "0") {
-                   updateRadioButtons(session,
-                                     "previous_time_range",
-                                     choices = list("Previous Year" = "previous_year"),
-                                     selected = "previous_year")
+                   updateRadioButtons(
+                     session,
+                     "previous_time_range",
+                     choices = list("Previous Year" = "previous_year"),
+                     selected = "previous_year"
+                   )
                  } else {
-                   updateRadioButtons(session,
-                                      "previous_time_range",
-                                      choices = list("Previous Year" = "previous_year", "Previous Month" = "previous_month"),
-                                      selected = input$previous_time_range)
+                   updateRadioButtons(
+                     session,
+                     "previous_time_range",
+                     choices = list("Previous Year" = "previous_year", "Previous Month" = "previous_month"),
+                     selected = input$previous_time_range
+                   )
                  }
                })
   
@@ -88,7 +101,16 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  callModule(choroplethMap, "revenueByCountryMap", metric = "revenue")
+  
+  callModule(
+    module = choroplethMap,
+    id = "revenue_by_country_map",
+    df = data_by_country,
+    metric = "revenue",
+    y = selected_year,
+    m = selected_month
+  )
+  
   callModule(
     module = dygraphChart,
     id = "cost",
