@@ -13,11 +13,26 @@ server <- function(input, output, session) {
              stringsAsFactors = TRUE)
   daily_production$date <- ymd(daily_production$date)
   
-  output$profit <- renderText({
+  totalProfitSelected <- reactive({
     getTotalProfitByTimeRange(orders,
-                    daily_production,
-                    input$selected_year,
-                    input$selected_month)
+                              daily_production,
+                              input$selected_year,
+                              input$selected_month)
+  })
+  
+  totalProfitPrevious <- reactive({
+    getTotalProfitByTimeRange(orders,
+                              daily_production,
+                              input$previous_year,
+                              input$previous_month)
+  })
+  
+  output$profit <- renderText({
+    totalProfitSelected()
+  })
+  
+  output$profitChange <- renderUI({
+    getPercentChangeHtml(totalProfitSelected(), totalProfitPrevious())
   })
   
   output$orders_count <- renderText({
@@ -27,7 +42,11 @@ server <- function(input, output, session) {
   observeEvent(c(input$selected_year),
                {
                  monthsChoices <- getMonthsChoices(input$selected_year)
-                 selectedMonth <- if (input$selected_month %in% monthsChoices) input$selected_month else "all"
+                 selectedMonth <-
+                   if (input$selected_month %in% monthsChoices)
+                     input$selected_month
+                 else
+                   "all"
                  updateSelectInput(session,
                                    "selected_month",
                                    selected = selectedMonth,

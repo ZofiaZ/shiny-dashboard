@@ -46,7 +46,7 @@ dygraphChart <-
       
       dygraph(data()) %>%
         dyBarChart() %>%
-        dyAxis("y", label = "costs ($)") %>%
+        dyAxis("y", label = "costs ($)", axisLabelWidth = 40) %>%
         dyAxis("x", drawGrid = FALSE) %>%
         dySeries("V1", label = "costs ($)", color = "#29bed8") %>%
         dyOptions(

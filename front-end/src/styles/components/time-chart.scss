@@ -1,9 +1,15 @@
 .time-chart {
   .time-chart-container {
-    padding: 10px;
+    padding: 20px 10px 10px;
+  }
+
+  .dygraph-label {
+    font-size: rem(10px);
   }
 
   .dygraph-legend {
-    background-color: transparent !important; // overwrite dygraph inline style
+    // overwrite dygraph inline styles
+    background-color: transparent !important;
+    top: -10px !important;
   }
 }
