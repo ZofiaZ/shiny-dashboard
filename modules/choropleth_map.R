@@ -51,6 +51,7 @@ choroplethMap <-
       
       leaflet() %>%
         addTiles()  %>%
+        addProviderTiles(providers$CartoDB.VoyagerNoLabels) %>%
         setView(lat = 10,
                 lng = 0 ,
                 zoom = 2) %>%

@@ -1,6 +1,6 @@
 set.seed(1)
 
-number_of_orders <- 4000
+number_of_orders <- 6000
 markets <- c("United States of America", "Brazil", "Germany", "Sweden", "Spain", "Zimbabwe")
 product_categories <- c("Monitoring Cameras", "Sensoric Cables", "Fence")
 business_start_date <- as.Date('2018/01/01')
@@ -12,9 +12,9 @@ business_running_days <- interval(business_start_date, last_day) %>% time_length
 orders <- data.frame(
   "date" = sample(seq(business_start_date, last_day, by="day"),size = number_of_orders, replace = TRUE),
   "country" = sample(x = markets, size = number_of_orders, replace = TRUE),
-  "revenue" = sample(x = 1000:5000, size = number_of_orders),
   "product_type" = sample(x = product_categories, size = number_of_orders, replace = TRUE)
-) %>% arrange(date) 
+) %>% arrange(date) %>% mutate(revenue = c(sample(x = 1000:2000, size = number_of_orders / 3, replace = TRUE), sample(x = 2000:3000, size = number_of_orders / 3, replace = TRUE), sample(x = 3000:4000, size = number_of_orders / 3, replace = TRUE)),
+)
 
 orders %>%
   write_csv("data/orders.csv")
