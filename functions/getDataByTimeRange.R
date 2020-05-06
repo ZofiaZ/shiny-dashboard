@@ -41,7 +41,13 @@ getMonthlyDataByYear  <- function(df, y, metric) {
   getSubsetByTimeRange(df, y, m = NULL, metric) %>%
     mutate(date = floor_date(date, "month") ) %>%
     group_by(date) %>%
-    summarize_at(.vars = c(metric), .funs = sum)
+    summarize_at(.vars = c(metric), .funs = sumNonNAValues)
 }
 
-
+sumNonNAValues <- function(v) {
+  if (length(v[!is.na(v)]) == 0) {
+    return(NA)
+  } else {
+    sum(v, na.rm=TRUE)
+  }
+}

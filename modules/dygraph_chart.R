@@ -26,7 +26,7 @@ dygraphChart <-
         metric_change_key <- paste0("cost_change_", previous_time_range())
         
       if (m() == "0") {
-        costs <-getMonthlyDataByYear(df, y(), metric=c(metric,"cost_change_prev_year"))
+        costs <- getMonthlyDataByYear(df, y(), metric=c(metric,"cost_change_prev_year"))
         label = "prev year diff"
       } else {
         costs <- getSubsetByTimeRange(df, y(), m(), metric=c(metric,"cost_change_prev_month", "cost_change_prev_year"))
