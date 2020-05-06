@@ -62,12 +62,9 @@ getPrevYearMonthlyChange <- function(current_date,
     return(NA)
   }
   
-  if (current_no_of_days != prev_no_of_days) {
-    prev_mean <- prev_value / prev_no_of_days
-    prev_value <- prev_value + prev_mean * (current_no_of_days - prev_no_of_days)
-  }
+  prev_value_standardized <- getStandardizedPrevValue(prev_value, current_no_of_days, prev_no_of_days)
   
-  return(getPercentChangeValue(current_value, prev_value))
+  return(getPercentChangeValue(current_value, prev_value_standardized))
 }
 
 getPrevYearChange <- function(current_date,
@@ -90,10 +87,16 @@ getPrevYearChange <- function(current_date,
   current_no_of_days <- interval(floor_date(current_date, "year"), end_of_current_year) %>% time_length("days")
   prev_no_of_days <- interval(floor_date(prev_date, "year"), ceiling_date(prev_date, 'year')) %>% time_length("days")
 
+  prev_value_standardized <- getStandardizedPrevValue(prev_value, current_no_of_days, prev_no_of_days)
+
+  return(getPercentChangeValue(current_value, prev_value_standardized))
+}
+
+getStandardizedPrevValue <- function(prev_value, current_no_of_days, prev_no_of_days) {
   if (current_no_of_days != prev_no_of_days) {
     prev_mean <- prev_value / prev_no_of_days
-    prev_value <- prev_value + prev_mean * (current_no_of_days - prev_no_of_days)
+    return(prev_value + prev_mean * (current_no_of_days - prev_no_of_days))
+  } else {
+    return(prev_value)
   }
-  
-  return(getPercentChangeValue(current_value, prev_value))
 }

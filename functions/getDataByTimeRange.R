@@ -14,21 +14,8 @@ getSubsetByTimeRange <- function(df, y, m = NULL, metric) {
   }
 }
 
-getSubsetByTimeRangeToDate <- function(df, y, m = NULL, metric, to_date_limit) {
-  if (is.null(m) || m == "0") {
-    day_in_year <- interval(floor_date(to_date_limit, 'year'), to_date_limit) %>% time_length("days")
-    getSubsetByTimeRange(df, y, m, metric)[1:day_in_year,]
-  } else {
-    getSubsetByTimeRange(df, y, m, metric)[1:day(to_date_limit),]
-  }
-}
-
 getMetricByTimeRange <- function(df, y, m = NULL, metric, f, to_date_limit=NULL) {
-  if (is.null(to_date_limit)) {
-    filtered_df = getSubsetByTimeRange(df, y, m, metric)
-  } else {
-    filtered_df = getSubsetByTimeRangeToDate(df, y, m, metric, to_date_limit)
-  }
+  filtered_df = getSubsetByTimeRange(df, y, m, metric)
   
   if (nrow(filtered_df) == 0)
     0

@@ -10,7 +10,8 @@ dygraphChart <-
            output,
            session,
            df,
-           metric = "cost",
+           metric,
+           metric_name,
            y,
            m,
            previous_time_range) {
@@ -23,24 +24,24 @@ dygraphChart <-
     }
     
     output$dygraph <- renderDygraph({
-        metric_change_key <- paste0("cost_change_", previous_time_range())
+        metric_change_key <- paste0(metric, "_change_", previous_time_range())
         
       if (m() == "0") {
-        costs <- getMonthlyDataByYear(df, y(), metric=c(metric,"cost_change_prev_year"))
-        label = "prev year diff"
+        subset <- getMonthlyDataByYear(df, y(), metric=c(metric, metric_change_key))
+        diff_label = "prev year diff"
       } else {
-        costs <- getSubsetByTimeRange(df, y(), m(), metric=c(metric,"cost_change_prev_month", "cost_change_prev_year"))
-        label = ifelse(previous_time_range()=="prev_year", "prev year diff", "prev month diff")
+        subset <- getSubsetByTimeRange(df, y(), m(), metric=c(metric, metric_change_key))
+        diff_label = ifelse(previous_time_range()=="prev_year", "prev year diff", "prev month diff")
       }
         
-      data <- xts(x = select(costs, "cost", metric_change_key), order.by = costs$date)
+      data <- xts(x = select(subset, "cost", metric_change_key), order.by = subset$date)
       
       dygraph(data) %>%
         dyBarChart() %>%
-        dyAxis("y", label = "costs ($)", axisLabelWidth = 40) %>%
+        dyAxis("y", label = metric_name, axisLabelWidth = 40) %>%
         dyAxis("x", drawGrid = FALSE) %>%
-        dySeries("cost", label = "costs ($)", color = "rgba(41,190,216,1)") %>%
-        dySeries(metric_change_key, label = label, color = "rgba(248,216,77,0.8)") %>%
+        dySeries(metric, label = metric_name, color = "rgba(41,190,216,1)") %>%
+        dySeries(metric_change_key, label = diff_label, color = "rgba(248,216,77,0.8)") %>%
         dyOptions(
           includeZero = TRUE,
           axisLineColor = "#585858",
