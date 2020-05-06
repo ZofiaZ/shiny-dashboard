@@ -14,20 +14,20 @@ getSubsetByTimeRange <- function(df, y, m = NULL, metric) {
   }
 }
 
-getSubsetByTimeRangeToDay <- function(df, y, m = NULL, metric, data_last_day) {
+getSubsetByTimeRangeToDate <- function(df, y, m = NULL, metric, to_date_limit) {
   if (is.null(m) || m == "0") {
-    day_in_year <- interval(floor_date(data_last_day, 'year'), data_last_day) %>% time_length("days")
+    day_in_year <- interval(floor_date(to_date_limit, 'year'), to_date_limit) %>% time_length("days")
     getSubsetByTimeRange(df, y, m, metric)[1:day_in_year,]
   } else {
-    getSubsetByTimeRange(df, y, m, metric)[1:day(data_last_day),]
+    getSubsetByTimeRange(df, y, m, metric)[1:day(to_date_limit),]
   }
 }
 
-getMetricByTimeRange <- function(df, y, m = NULL, metric, f, data_last_day=NULL) {
-  if (is.null(data_last_day)) {
+getMetricByTimeRange <- function(df, y, m = NULL, metric, f, to_date_limit=NULL) {
+  if (is.null(to_date_limit)) {
     filtered_df = getSubsetByTimeRange(df, y, m, metric)
   } else {
-    filtered_df = getSubsetByTimeRangeToDay(df, y, m, metric, data_last_day)
+    filtered_df = getSubsetByTimeRangeToDate(df, y, m, metric, to_date_limit)
   }
   
   if (nrow(filtered_df) == 0)
@@ -37,22 +37,8 @@ getMetricByTimeRange <- function(df, y, m = NULL, metric, f, data_last_day=NULL)
   }
 }
 
-getTotalRevenueByTimeRange <- function(orders_df, y, m = NULL) {
-  # TODO: check functional programming and currying in R
-  getMetricByTimeRange(orders_df, y, m, "revenue", sum)
-}
-
-getTotalCostByTimeRange <- function(production_df, y, m = NULL) {
-  getMetricByTimeRange(production_df, y, m, "cost", sum)
-}
-
-getOrdersCountByTimeRange <- function(orders_df, y, m = NULL) {
-  getMetricByTimeRange(orders_df, y, m, "revenue", nrow)
-}
-
 getMonthlyDataByYear  <- function(df, y, metric) {
   getSubsetByTimeRange(df, y, m = NULL, metric) %>%
-    mutate(month = month(date)) %>%
     mutate(date = floor_date(date, "month") ) %>%
     group_by(date) %>%
     summarize_at(.vars = c(metric), .funs = sum)

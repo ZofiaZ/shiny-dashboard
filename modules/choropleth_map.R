@@ -17,6 +17,7 @@ choroplethMap <-
            output,
            session,
            metric,
+           countriesGeoData,
            df,
            y,
            m) {

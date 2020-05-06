@@ -12,13 +12,14 @@ dygraphChart <-
            df,
            metric = "cost",
            y,
-           m) {
-    days_in_month_count <-
-      reactive({
-        paste(y(), m(), '01', 'sep' = '-') %>%
-          as.Date() %>%
-          days_in_month()
-      })
+           m,
+           previous_time_range) {
+    # days_in_month_count <-
+    #   reactive({
+    #     paste(y(), m(), '01', 'sep' = '-') %>%
+    #       as.Date() %>%
+    #       days_in_month()
+    #   })
     
     dyBarChart <- function(dygraph) {
       dyPlotter(
@@ -41,7 +42,7 @@ dygraphChart <-
       
       data <-
         reactive({
-          xts(x = costs()$cost, order.by = costs()$date)
+          xts(x = costs()[[metric]], order.by = costs()$date)
         })
       
       dygraph(data()) %>%

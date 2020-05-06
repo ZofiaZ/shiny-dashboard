@@ -4,8 +4,8 @@ library(dygraphs)
 
 htmlTemplate(
   "www/index.html",
-  selectYear = selectInput("selected_year", "Year", getYearChoices(business_start_date), width = NULL),
-  selectMonth = selectInput("selected_month", "Month", getMonthsChoices(), width = NULL),
+  selectYear = selectInput("selected_year", "Year", getYearChoices(data_first_day, data_last_day), width = NULL),
+  selectMonth = selectInput("selected_month", "Month", getMonthsChoices(year = NULL, data_last_day), width = NULL),
   previousTimeRange = radioButtons("previous_time_range", label = h3("Compare to:"),
                                    choices = list("Previous Year" = "previous_year", "Previous Month" = "previous_month"), 
                                    selected = "previous_year"),
