@@ -14,13 +14,6 @@ dygraphChart <-
            y,
            m,
            previous_time_range) {
-    # days_in_month_count <-
-    #   reactive({
-    #     paste(y(), m(), '01', 'sep' = '-') %>%
-    #       as.Date() %>%
-    #       days_in_month()
-    #   })
-    
     dyBarChart <- function(dygraph) {
       dyPlotter(
         dygraph = dygraph,
@@ -30,33 +23,30 @@ dygraphChart <-
     }
     
     output$dygraph <- renderDygraph({
+        metric_change_key <- paste0("cost_change_", previous_time_range())
+        
       if (m() == "0") {
-        costs <- reactive({
-          getMonthlyDataByYear(df, y(), metric)
-        })
+        costs <-getMonthlyDataByYear(df, y(), metric=c(metric,"cost_change_prev_year"))
+        label = "prev year diff"
       } else {
-        costs <- reactive({
-          getSubsetByTimeRange(df, y(), m(), metric)
-        })
+        costs <- getSubsetByTimeRange(df, y(), m(), metric=c(metric,"cost_change_prev_month", "cost_change_prev_year"))
+        label = ifelse(previous_time_range()=="prev_year", "prev year diff", "prev month diff")
       }
+        
+      data <- xts(x = select(costs, "cost", metric_change_key), order.by = costs$date)
       
-      data <-
-        reactive({
-          xts(x = costs()[[metric]], order.by = costs()$date)
-        })
-      
-      dygraph(data()) %>%
+      dygraph(data) %>%
         dyBarChart() %>%
         dyAxis("y", label = "costs ($)", axisLabelWidth = 40) %>%
         dyAxis("x", drawGrid = FALSE) %>%
-        dySeries("V1", label = "costs ($)", color = "#29bed8") %>%
+        dySeries("cost", label = "costs ($)", color = "rgba(41,190,216,1)") %>%
+        dySeries(metric_change_key, label = label, color = "rgba(248,216,77,0.8)") %>%
         dyOptions(
           includeZero = TRUE,
           axisLineColor = "#585858",
           gridLineColor = "#bdc2c6",
           axisLabelFontSize = 12,
           axisLabelColor = "#585858",
-          disableZoom = TRUE
-        )
+          disableZoom = TRUE)
     })
   }

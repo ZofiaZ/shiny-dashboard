@@ -1,4 +1,10 @@
 getPercentChangeValue <- function(current_value, prev_value) {
+  if (is.null(prev_value)) {
+    return(NA)
+  }
+  if (prev_value == 0) {
+    return(100)
+  }
   ((current_value - prev_value) / prev_value * 100) %>% round(digits = 2)
 }
 

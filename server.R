@@ -2,6 +2,7 @@ library(lubridate)
 library(glue)
 
 source("functions/getPercentChange.R")
+source("functions/getPrevValue.R")
 
 orders <-
   read.csv("data/orders.csv",
@@ -14,6 +15,12 @@ daily_production <-
            header = TRUE,
            stringsAsFactors = TRUE) %>%
   mutate(date = ymd(date))
+
+daily_production <- daily_production %>%
+  mutate(cost_prev_month = mapply(getPrevMonthValue, date, MoreArgs = list(df=daily_production, metric="cost"))) %>%
+  mutate(cost_change_prev_month = cost - cost_prev_month) %>%
+  mutate(cost_prev_year = mapply(getPrevYearValue, date, MoreArgs = list(df=daily_production, metric="cost"))) %>%
+  mutate(cost_change_prev_year = cost - cost_prev_year)
 
 daily_data <- orders %>%
   group_by(date) %>%
@@ -30,12 +37,10 @@ monthly_data <- daily_data %>%
   mutate(profit_change_prev_month = mapply(getPrevMonthChange, date, profit, lag(profit), MoreArgs=list(data_last_day=data_last_day))) %>%
   mutate(orders_count_change_prev_month = mapply(getPrevMonthChange, date, orders_count, lag(orders_count), MoreArgs=list(data_last_day=data_last_day)))
 
-
 monthly_data <- monthly_data %>%
   mutate(revenue_change_prev_year = mapply(getPrevYearMonthlyChange, date, revenue, MoreArgs=list(df=monthly_data,metric="revenue", data_last_day=data_last_day))) %>%
   mutate(profit_change_prev_year = mapply(getPrevYearMonthlyChange, date, revenue, MoreArgs=list(df=monthly_data,metric="profit", data_last_day=data_last_day))) %>%
   mutate(orders_count_change_prev_year = mapply(getPrevYearMonthlyChange, date, orders_count, MoreArgs=list(df=monthly_data,metric="orders_count", data_last_day=data_last_day)))
-
 
 yearly_data <- monthly_data %>% 
   mutate(date = floor_date(date, 'year')) %>%
