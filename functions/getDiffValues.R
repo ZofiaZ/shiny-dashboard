@@ -100,3 +100,11 @@ getStandardizedPrevValue <- function(prev_value, current_no_of_days, prev_no_of_
     return(prev_value)
   }
 }
+
+getDaysInMonth <- function(date, data_last_day) {
+  if (year(date) == year(data_last_day) && month(date) == month(data_last_day)) {
+    day(data_last_day)
+  } else {
+    days_in_month(date)
+  }
+}

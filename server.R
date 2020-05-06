@@ -1,9 +1,10 @@
+library(dplyr)
 library(lubridate)
 library(glue)
 
-source("functions/getPrevValues.R")
-source("functions/getDiffValues.R")
-source("functions/getDataByTimeRange.R")
+source("./functions/getPrevValues.R")
+source("./functions/getDiffValues.R")
+source("./functions/getDataByTimeRange.R")
 
 orders <-
   read.csv("data/orders.csv",
@@ -29,6 +30,8 @@ daily_data <- orders %>%
   summarize_at(.vars = c('revenue', 'orders_count'), .funs = sum) %>%
   left_join(daily_production, by = "date") %>%
   mutate(profit = revenue - cost)
+
+print("test")
 
 monthly_data <- daily_data %>% 
   mutate(date = floor_date(date, 'month')) %>%
@@ -56,7 +59,6 @@ data_by_country <- orders %>%
   group_by(country, date) %>% 
   mutate(orders_count = n()) %>%
   summarize_at(.vars = c('revenue', 'orders_count'), .funs = sum)
-# TODO add costs data by country
 
 countriesGeoData <-
   geojsonio::geojson_read("data/countries.geojson", what = "sp")
