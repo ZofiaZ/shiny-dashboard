@@ -1,8 +1,9 @@
 library(lubridate)
 library(glue)
 
-source("functions/getPercentChange.R")
-source("functions/getPrevValue.R")
+source("functions/getPrevValues.R")
+source("functions/getDiffValues.R")
+source("functions/getDataByTimeRange.R")
 
 orders <-
   read.csv("data/orders.csv",
@@ -148,6 +149,7 @@ server <- function(input, output, session) {
     id = "cost",
     df = daily_production,
     metric = "cost",
+    metric_name = "Cost ($)",
     y = selected_year,
     m = selected_month,
     previous_time_range = previous_time_range

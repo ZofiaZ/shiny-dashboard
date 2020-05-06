@@ -21,7 +21,7 @@ orders %>%
 
 daily_production <- data.frame(
   "date" = seq(business_start_date, ceiling_date(last_day, "year"), by="day"),
-  "cost" = c(sample(x = 10:60, size = business_running_days, replace = TRUE), rep(NA, times = remaining_days_in_year))
+  "cost" = c(sample(x = 50:70, size = business_running_days, replace = TRUE), rep(NA, times = remaining_days_in_year))
 )
 
 daily_production  %>%
