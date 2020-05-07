@@ -1,0 +1,5 @@
+"","date","revenue","profit","orders_count","cost","profit.perc_prev_year","cost.perc_prev_year","orders_count.perc_prev_year","revenue.perc_prev_year"
+"1",2018-01-01,4403726,4381707,20528,22019,NA,NA,NA,NA
+"2",2019-01-01,7484131,7462199,20649,21932,70.3,-0.4,0.59,69.95
+"3",2020-01-01,3089104,3081424,6949,7680,19.62,1.44,-2.51,19.57
+"4",2021-01-01,NA,NA,NA,NA,NA,NA,NA,NA

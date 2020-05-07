@@ -1,4 +1,5 @@
 library(dygraphs)
+library(xts)
 
 dygraphChartOutput <- function(id) {
   ns <- NS(id)
@@ -24,7 +25,7 @@ dygraphChart <-
     }
     
     output$dygraph <- renderDygraph({
-        metric_change_key <- paste0(metric, "_change_", previous_time_range())
+        metric_change_key <- paste0(metric, ".change_", previous_time_range())
         
       if (m() == "0") {
         subset <- getMonthlyDataByYear(df, y(), metric=c(metric, metric_change_key))
@@ -34,7 +35,7 @@ dygraphChart <-
         diff_label = ifelse(previous_time_range()=="prev_year", "prev year diff", "prev month diff")
       }
         
-      data <- xts(x = select(subset, "cost", metric_change_key), order.by = subset$date)
+      data <- xts(x = select(subset, c(metric, metric_change_key)), order.by = subset$date)
       
       dygraph(data) %>%
         dyBarChart() %>%

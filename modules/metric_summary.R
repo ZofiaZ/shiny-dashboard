@@ -9,8 +9,8 @@ metricSummaryServer <-
   function(input,
            output,
            session,
-           yearly_data,
-           monthly_data,
+           yearly_df,
+           monthly_df,
            metric,
            title,
            y,
@@ -18,9 +18,9 @@ metricSummaryServer <-
            previous_time_range) {
     df <- reactive({
       if(m() == 0) {
-        yearly_data
+        yearly_df
       } else {
-        monthly_data
+        monthly_df
       }
     })
     
@@ -34,8 +34,8 @@ metricSummaryServer <-
       }
     })
     
-    metric_total_value <- reactive({ row()[,metric] %>% pull() })
-    metric_change <- reactive({ row()[,paste0(metric, '_change_', prev_timerange_suffix())] %>% pull() %>% getPercentChangeSpan()})
+    metric_total_value <- reactive({ row()[,metric] })
+    metric_change <- reactive({ row()[,paste0(metric, '.perc_', prev_timerange_suffix())]  %>% getPercentChangeSpan()})
 
     output$metricSummary <- renderUI({
       glue(
