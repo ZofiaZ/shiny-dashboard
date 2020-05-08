@@ -27,5 +27,23 @@ metrics_list <- list(
     title = "Orders",
     currency = NULL,
     legend = "Number of orders"
+  ),
+  produced_items = list(
+    id = "produced_items",
+    title = "Produced Items",
+    currency = NULL,
+    legend = "Produced items"
+  ),
+  users = list(
+    id = "users",
+    title = "Active Users",
+    currency = NULL,
+    legend = "Active users"
+  ), 
+  complaints = list(
+    id = "complaints",
+    title = "Open Complaints",
+    currency = NULL,
+    legend = "Open complaints"
   )
 )

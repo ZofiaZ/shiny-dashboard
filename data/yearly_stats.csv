@@ -1,5 +1,5 @@
-"","date","revenue","cost","profit","orders_count","profit.perc_prev_year","cost.perc_prev_year","orders_count.perc_prev_year","revenue.perc_prev_year"
-"1",2018-01-01,4392461,22019,4370442,25574,NA,NA,NA,NA
-"2",2019-01-01,7500628,21932,7478696,25563,71.12,-0.4,-0.04,70.76
-"3",2020-01-01,3104543,7680,3075827,8863,18.2,0.64,-0.35,18.96
-"4",2021-01-01,NA,NA,NA,NA,NA,NA,NA,NA
+"","date","revenue","cost","profit","orders_count","produced_items","users","complaints","profit.perc_prev_year","cost.perc_prev_year","orders_count.perc_prev_year","revenue.perc_prev_year","produced_items.perc_prev_year","users.perc_prev_year","complaints.perc_prev_year"
+"1",2018-01-01,965214,266658,698556,53623,38094,214492,32979,NA,NA,NA,NA,NA,NA,NA
+"2",2019-01-01,2087460,268632,1818828,115970,38376,463880,32905,160.37,0.74,116.27,116.27,0.74,116.27,-0.22
+"3",2020-01-01,971946,94388,877558,53997,13484,215988,11483,38.67,0.98,33.82,33.82,0.98,33.82,0.3
+"4",2021-01-01,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

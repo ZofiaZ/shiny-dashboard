@@ -94,10 +94,32 @@ server <- function(input, output, session) {
   
   callModule(
     module = metricSummary,
+    id = "users",
+    yearly_df = yearly_stats,
+    monthly_df = monthly_stats,
+    metric = metrics_list$users,
+    y = selected_year,
+    m = selected_month,
+    previous_time_range = previous_time_range
+  )
+  
+  callModule(
+    module = metricSummary,
     id = "orders_count",
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
     metric = metrics_list$orders_count,
+    y = selected_year,
+    m = selected_month,
+    previous_time_range = previous_time_range
+  )
+  
+  callModule(
+    module = metricSummary,
+    id = "complaints",
+    yearly_df = yearly_stats,
+    monthly_df = monthly_stats,
+    metric = metrics_list$complaints,
     y = selected_year,
     m = selected_month,
     previous_time_range = previous_time_range
