@@ -7,7 +7,7 @@ choroplethMapOutput <- function(id) {
 }
 
 getCountriesDataByDate <- function(df, y, m, metric, f = sum) {
-  getSubsetByTimeRange(df, y, m, metric=c('country', metric)) %>%
+  getSubsetByTimeRange(df, y, m, metric = c("country", metric)) %>%
     group_by(country) %>%
     summarize_at(.vars = c(metric), .funs = f)
 }
@@ -17,43 +17,44 @@ choroplethMap <-
            output,
            session,
            metric,
-           countriesGeoData,
+           countries_geo_data,
            df,
            y,
            m) {
-    
-    countriesDf = reactive({
+    countries_df <- reactive({
       getCountriesDataByDate(df, y(), m(), metric()$id, sum)
     })
-  
-  
+
+
     output$choroplethCountryMap <- renderLeaflet({
       # Create a color palette for the map
-      mapPalette <-
+      map_palette <-
         colorQuantile(
-          palette = colorRampPalette(c("#f8d84d", '#bdd64b'))(6),
-          domain = countriesDf()[[metric()$id]],
+          palette = colorRampPalette(c("#f8d84d", "#bdd64b"))(6),
+          domain = countries_df()[[metric()$id]],
           6,
           na.color = "transparent"
         )
-    
+
       # Prepare the text for tooltips:
       metric_prefix <- ifelse(!is.null(metric()$currency), metric()$currency, "")
       tooltip <- glue(
-        "<h4>{countriesDf()$country}</h4>
+        "<h4>{countries_df()$country}</h4>
         <span class='metric-name'>{metric()$legend}: </span>
-        <span class='metric-value'>{metric_prefix}{countriesDf()[[metric()$id]]}<span class='metric-name'>"
+        <span class='metric-value'>{metric_prefix}{countries_df()[[metric()$id]]}<span class='metric-name'>"
       ) %>% lapply(HTML)
-      
+
       leaflet() %>%
-        addTiles()  %>%
+        addTiles() %>%
         addProviderTiles(providers$CartoDB.VoyagerNoLabels) %>%
-        setView(lat = 10,
-                lng = 0 ,
-                zoom = 2) %>%
+        setView(
+          lat = 10,
+          lng = 0,
+          zoom = 2
+        ) %>%
         leaflet::addPolygons(
-          data = countriesGeoData,
-          fillColor = ~ mapPalette(countriesDf()[[metric()$id]]),
+          data = countries_geo_data,
+          fillColor = ~ map_palette(countries_df()[[metric()$id]]),
           stroke = FALSE,
           fillOpacity = 0.9,
           label = tooltip,

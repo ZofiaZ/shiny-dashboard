@@ -1,7 +1,7 @@
 # settings (for generating sample data and shiny app)
 
-data_last_day <- '2020-05-07' %>% as.Date()
-data_first_day <- '2018-01-01' %>% as.Date()
+data_last_day <- "2020-05-07" %>% as.Date()
+data_first_day <- "2018-01-01" %>% as.Date()
 
 metrics_list <- list(
   revenue = list(
@@ -10,7 +10,7 @@ metrics_list <- list(
     currency = "$",
     legend = "Revenue"
   ),
-  cost = list (
+  cost = list(
     id = "cost",
     title = "Production Costs",
     currency = "$",
@@ -39,7 +39,7 @@ metrics_list <- list(
     title = "Active Users",
     currency = NULL,
     legend = "Active users"
-  ), 
+  ),
   complaints = list(
     id = "complaints",
     title = "Open Complaints",

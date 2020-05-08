@@ -7,80 +7,85 @@ source("./functions/getDataByTimeRange.R")
 
 daily_stats <-
   read.csv("data/daily_stats.csv",
-           header = TRUE,
-           stringsAsFactors = TRUE) %>%
+    header = TRUE,
+    stringsAsFactors = TRUE
+  ) %>%
   mutate(date = ymd(date))
 
 monthly_stats <-
   read.csv("data/monthly_stats.csv",
-           header = TRUE,
-           stringsAsFactors = TRUE) %>%
+    header = TRUE,
+    stringsAsFactors = TRUE
+  ) %>%
   mutate(date = ymd(date))
 
 yearly_stats <-
   read.csv("data/yearly_stats.csv",
-           header = TRUE,
-           stringsAsFactors = TRUE) %>%
+    header = TRUE,
+    stringsAsFactors = TRUE
+  ) %>%
   mutate(date = ymd(date))
 
 countries_stats <-
   read.csv("data/countries_stats.csv",
-           header = TRUE,
-           stringsAsFactors = TRUE) %>%
+    header = TRUE,
+    stringsAsFactors = TRUE
+  ) %>%
   mutate(date = ymd(date))
 
-countriesGeoData <-
+countries_geo_data <-
   geojsonio::geojson_read("data/countries.geojson", what = "sp")
 
-countriesGeoData@data <- countriesGeoData@data %>%
+countries_geo_data@data <- countries_geo_data@data %>%
   mutate(country = ADMIN)
 
 server <- function(input, output, session) {
-  observeEvent(c(input$selected_year),
-               {
-                 monthsChoices <- getMonthsChoices(input$selected_year, data_last_day)
-                 selectedMonth <-
-                   ifelse(input$selected_month %in% monthsChoices,
-                          input$selected_month,
-                          "0")
-                 updateSelectInput(session,
-                                   "selected_month",
-                                   selected = selectedMonth,
-                                   choices = monthsChoices)
-               })
-  
-  observeEvent(c(input$selected_month),
-               {
-                 if (input$selected_month == "0") {
-                   updateRadioButtons(
-                     session,
-                     "previous_time_range",
-                     choices = list("Previous Year" = "prev_year"),
-                     selected = "prev_year"
-                   )
-                 } else {
-                   updateRadioButtons(
-                     session,
-                     "previous_time_range",
-                     choices = list("Previous Year" = "prev_year", "Previous Month" = "prev_month"),
-                     selected = input$previous_time_range
-                   )
-                 }
-               })
-  
-  
+  observeEvent(c(input$selected_year), {
+    months_choices <-
+      getMonthsChoices(input$selected_year, data_last_day)
+    selected_month <-
+      ifelse(input$selected_month %in% months_choices,
+        input$selected_month,
+        "0"
+      )
+    updateSelectInput(session,
+      "selected_month",
+      selected = selected_month,
+      choices = months_choices
+    )
+  })
+
+  observeEvent(c(input$selected_month), {
+    if (input$selected_month == "0") {
+      updateRadioButtons(
+        session,
+        "previous_time_range",
+        choices = list("Previous Year" = "prev_year"),
+        selected = "prev_year"
+      )
+    } else {
+      updateRadioButtons(
+        session,
+        "previous_time_range",
+        choices = list("Previous Year" = "prev_year", "Previous Month" = "prev_month"),
+        selected = input$previous_time_range
+      )
+    }
+  })
+
+
   selected_year <- reactive({
     input$selected_year
   })
-  
+
   selected_month <- reactive({
     input$selected_month
   })
-  
+
   previous_time_range <- reactive({
     input$previous_time_range
   })
-  
+
   callModule(
     module = metricSummary,
     id = "profit",
@@ -91,7 +96,7 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  
+
   callModule(
     module = metricSummary,
     id = "users",
@@ -102,7 +107,7 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  
+
   callModule(
     module = metricSummary,
     id = "orders_count",
@@ -113,7 +118,7 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  
+
   callModule(
     module = metricSummary,
     id = "complaints",
@@ -124,7 +129,7 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  
+
   callModule(
     module = dygraphChart,
     id = "time_chart",
@@ -136,12 +141,12 @@ server <- function(input, output, session) {
     m = selected_month,
     previous_time_range = previous_time_range
   )
-  
+
   callModule(
     module = choroplethMap,
     id = "country_map",
     df = countries_stats,
-    countriesGeoData = countriesGeoData,
+    countries_geo_data = countries_geo_data,
     metric = reactive({
       metrics_list[[input$map_metric]]
     }),
