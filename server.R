@@ -121,7 +121,7 @@ server <- function(input, output, session) {
     df = countries_stats,
     countriesGeoData = countriesGeoData,
     metric = reactive({
-      input$map_metric
+      metrics_list[[input$map_metric]]
     }),
     y = selected_year,
     m = selected_month

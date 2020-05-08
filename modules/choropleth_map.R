@@ -23,7 +23,7 @@ choroplethMap <-
            m) {
     
     countriesDf = reactive({
-      getCountriesDataByDate(df, y(), m(), metric(), sum)
+      getCountriesDataByDate(df, y(), m(), metric()$id, sum)
     })
   
   
@@ -32,23 +32,18 @@ choroplethMap <-
       mapPalette <-
         colorQuantile(
           palette = colorRampPalette(c("#f8d84d", '#bdd64b'))(6),
-          domain = countriesDf()[[metric()]],
+          domain = countriesDf()[[metric()$id]],
           6,
           na.color = "transparent"
         )
     
       # Prepare the text for tooltips:
-      tooltip <- paste(
-        "Country: ",
-        countriesDf()$country,
-        "<br/>",
-        metric(),
-        ": ",
-        countriesDf()[[metric()]],
-        "<br/>",
-        sep = ""
-      ) %>%
-        lapply(htmltools::HTML)
+      metric_prefix <- ifelse(!is.null(metric()$currency), metric()$currency, "")
+      tooltip <- glue(
+        "<h4>{countriesDf()$country}</h4>
+        <span class='metric-name'>{metric()$legend}: </span>
+        <span class='metric-value'>{metric_prefix}{countriesDf()[[metric()$id]]}<span class='metric-name'>"
+      ) %>% lapply(HTML)
       
       leaflet() %>%
         addTiles()  %>%
@@ -58,7 +53,7 @@ choroplethMap <-
                 zoom = 2) %>%
         leaflet::addPolygons(
           data = countriesGeoData,
-          fillColor = ~ mapPalette(countriesDf()[[metric()]]),
+          fillColor = ~ mapPalette(countriesDf()[[metric()$id]]),
           stroke = FALSE,
           fillOpacity = 0.9,
           label = tooltip,
