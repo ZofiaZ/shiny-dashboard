@@ -3,17 +3,32 @@ library(xts)
 
 dygraphChartOutput <- function(id) {
   ns <- NS(id)
-  dygraphOutput(ns("dygraph"), height = "200px")
+
+  tagList(
+    tags$div(class = "tile-header", 
+        selectInput(
+      ns("metric"), "Metric",
+      list("Select" = "", "Production Costs" = "cost", "Profit" = "profit", "Orders" = "orders_count"),
+      width = NULL,
+      selectize = FALSE
+    )),
+    tags$div(class="time-chart-container",
+      dygraphOutput(ns("dygraph"), height = "200px"))
+  )
 }
 
 dygraphChart <- function(input,
                          output,
                          session,
                          df,
-                         metric,
                          y,
                          m,
                          previous_time_range) {
+  metric <- reactive({
+    validate(need(input$metric != "", "select metric"))
+    metrics_list[[input$metric]]
+  })
+
   dy_bar_chart <- function(dygraph) {
     dyPlotter(
       dygraph = dygraph,

@@ -22,16 +22,6 @@ htmlTemplate(
   usersSummary = metricSummaryOutput("users"),
   ordersCountSummary = metricSummaryOutput("orders_count"),
   complaintsSummary = metricSummaryOutput("complaints"),
-  selectDygraphMetric = selectInput(
-    "dygraph_metric", "Metric",
-    list("Production Costs" = "cost", "Profit" = "profit", "Orders" = "orders_count"),
-    width = NULL
-  ),
-  costDygraph = dygraphChartOutput("time_chart"),
-  selectMapMetric = selectInput(
-    "map_metric", "Metric",
-    list("Sales Revenue" = "revenue", "Orders count" = "orders_count"),
-    width = NULL
-  ),
+  timeChart = dygraphChartOutput("time_chart"),
   countryMap = choroplethMapOutput("country_map")
 )

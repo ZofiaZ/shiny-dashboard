@@ -3,7 +3,17 @@ library(leaflet)
 
 choroplethMapOutput <- function(id) {
   ns <- NS(id)
-  leafletOutput(ns("choroplethCountryMap"))
+  
+  tagList(
+    tags$div(class = "tile-header",
+    selectInput(
+      ns("metric"), "Metric",
+      list("Select" = "", "Sales Revenue" = "revenue", "Orders count" = "orders_count"),
+      width = NULL,
+      selectize = FALSE
+    )), #TODO add by country title
+    leafletOutput(ns("choroplethCountryMap"))
+  )
 }
 
 getCountriesDataByDate <- function(df, y, m, metric, f = sum) {
@@ -16,11 +26,15 @@ choroplethMap <-
   function(input,
            output,
            session,
-           metric,
            countries_geo_data,
            df,
            y,
            m) {
+    metric <- reactive({
+      validate(need(input$metric != "", "select metric"))
+      metrics_list[[input$metric]]
+    })
+    
     countries_df <- reactive({
       getCountriesDataByDate(df, y(), m(), metric()$id, sum)
     })
@@ -62,6 +76,7 @@ choroplethMap <-
             style = list("font-weight" = "normal", padding = "3px 8px"),
             textsize = "13px",
             direction = "auto"
+            #TODO move to scss
           )
         )
     })

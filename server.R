@@ -134,9 +134,6 @@ server <- function(input, output, session) {
     module = dygraphChart,
     id = "time_chart",
     df = daily_stats,
-    metric = reactive({
-      metrics_list[[input$dygraph_metric]]
-    }),
     y = selected_year,
     m = selected_month,
     previous_time_range = previous_time_range
@@ -147,9 +144,6 @@ server <- function(input, output, session) {
     id = "country_map",
     df = countries_stats,
     countries_geo_data = countries_geo_data,
-    metric = reactive({
-      metrics_list[[input$map_metric]]
-    }),
     y = selected_year,
     m = selected_month
   )

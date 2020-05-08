@@ -41,12 +41,7 @@
     <section class="page-section">
       <div class="subsection">
         <div class="tile-chart time-chart">
-          <div class="tile-header">
-            <h2 class="tile-title">{{ selectDygraphMetric }}</h2>
-          </div>
-          <div class="time-chart-container">
-            {{ costDygraph }}
-          </div>
+          {{ timeChart }}
         </div>
         <div class="tile-chart breakdown-chart">
           <div class="tile-header">
@@ -56,9 +51,6 @@
       </div>
       <div class="subsection">
         <div class="tile-chart map-chart">
-          <div class="tile-header">
-            <h2 class="tile-title">{{ selectMapMetric }} By Country</h2>
-          </div>
           {{ countryMap }}
         </div>
       </div>
