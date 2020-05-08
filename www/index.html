@@ -50,7 +50,7 @@
       <div class="subsection">
         <div class="tile-chart time-chart">
           <div class="tile-header">
-            <h2 class="tile-title">Production</h2>
+            <h2 class="tile-title">{{ selectDygraphMetric }}</h2>
           </div>
           <div class="time-chart-container">
             {{ costDygraph }}
@@ -65,9 +65,9 @@
       <div class="subsection">
         <div class="tile-chart map-chart">
           <div class="tile-header">
-            <h2 class="tile-title">Sales Revenue By Country</h2>
+            <h2 class="tile-title">{{ selectMapMetric }} By Country</h2>
           </div>
-          {{ revenueByCountryMap }}
+          {{ countryMap }}
         </div>
       </div>
     </section>

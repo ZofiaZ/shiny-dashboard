@@ -1,0 +1,31 @@
+# settings (for generating sample data and shiny app)
+
+data_last_day <- '2020-05-07' %>% as.Date()
+data_first_day <- '2018-01-01' %>% as.Date()
+
+metrics_list <- list(
+  revenue = list(
+    id = "revenue",
+    title = "Sales Revenue",
+    currency = "$",
+    legend = "Revenue"
+  ),
+  cost = list (
+    id = "cost",
+    title = "Production Costs",
+    currency = "$",
+    legend = "Cost"
+  ),
+  profit = list(
+    id = "profit",
+    title = "Profit",
+    currency = "$",
+    legend = "Profit"
+  ),
+  orders_count = list(
+    id = "orders_count",
+    title = "Orders",
+    currency = NULL,
+    legend = "Number of orders"
+  )
+)

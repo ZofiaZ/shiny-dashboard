@@ -23,7 +23,7 @@ choroplethMap <-
            m) {
     
     countriesDf = reactive({
-      getCountriesDataByDate(df, y(), m(), metric, sum)
+      getCountriesDataByDate(df, y(), m(), metric(), sum)
     })
   
   
@@ -32,7 +32,7 @@ choroplethMap <-
       mapPalette <-
         colorQuantile(
           palette = colorRampPalette(c("#f8d84d", '#bdd64b'))(6),
-          domain = countriesDf()[[metric]],
+          domain = countriesDf()[[metric()]],
           6,
           na.color = "transparent"
         )
@@ -42,9 +42,9 @@ choroplethMap <-
         "Country: ",
         countriesDf()$country,
         "<br/>",
-        metric,
+        metric(),
         ": ",
-        countriesDf()[[metric]],
+        countriesDf()[[metric()]],
         "<br/>",
         sep = ""
       ) %>%
@@ -58,7 +58,7 @@ choroplethMap <-
                 zoom = 2) %>%
         leaflet::addPolygons(
           data = countriesGeoData,
-          fillColor = ~ mapPalette(countriesDf()[[metric]]),
+          fillColor = ~ mapPalette(countriesDf()[[metric()]]),
           stroke = FALSE,
           fillOpacity = 0.9,
           label = tooltip,

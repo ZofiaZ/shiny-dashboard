@@ -2,7 +2,6 @@ library(dplyr)
 library(lubridate)
 library(glue)
 
-source("./functions/getPrevValues.R")
 source("./functions/getDiffValues.R")
 source("./functions/getDataByTimeRange.R")
 
@@ -83,24 +82,34 @@ server <- function(input, output, session) {
   })
   
   callModule(
-    module = metricSummaryServer,
+    module = metricSummary,
     id = "profit",
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
-    metric = "profit",
-    title = "Total Profit",
+    metric = metrics_list$profit,
     y = selected_year,
     m = selected_month,
     previous_time_range = previous_time_range
   )
   
   callModule(
-    module = metricSummaryServer,
+    module = metricSummary,
     id = "orders_count",
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
-    metric = "orders_count",
-    title = "Total orders",
+    metric = metrics_list$orders_count,
+    y = selected_year,
+    m = selected_month,
+    previous_time_range = previous_time_range
+  )
+  
+  callModule(
+    module = dygraphChart,
+    id = "time_chart",
+    df = daily_stats,
+    metric = reactive({
+      metrics_list[[input$dygraph_metric]]
+    }),
     y = selected_year,
     m = selected_month,
     previous_time_range = previous_time_range
@@ -108,22 +117,13 @@ server <- function(input, output, session) {
   
   callModule(
     module = choroplethMap,
-    id = "revenue_by_country_map",
+    id = "country_map",
     df = countries_stats,
     countriesGeoData = countriesGeoData,
-    metric = "revenue",
+    metric = reactive({
+      input$map_metric
+    }),
     y = selected_year,
     m = selected_month
-  )
-  
-  callModule(
-    module = dygraphChart,
-    id = "cost",
-    df = daily_stats,
-    metric = "cost",
-    metric_name = "Cost ($)",
-    y = selected_year,
-    m = selected_month,
-    previous_time_range = previous_time_range
   )
 }

@@ -5,14 +5,13 @@ metricSummaryOutput <- function(id) {
   uiOutput(ns("metricSummary"))
 }
 
-metricSummaryServer <-
+metricSummary <-
   function(input,
            output,
            session,
-           yearly_df,
-           monthly_df,
            metric,
-           title,
+           monthly_df,
+           yearly_df,
            y,
            m,
            previous_time_range) {
@@ -34,14 +33,15 @@ metricSummaryServer <-
       }
     })
     
-    metric_total_value <- reactive({ row()[,metric] })
-    metric_change <- reactive({ row()[,paste0(metric, '.perc_', prev_timerange_suffix())]  %>% getPercentChangeSpan()})
-
+    metric_total_value <- reactive({ row()[,metric$id] })
+    metric_change <- reactive({ row()[,paste0(metric$id, '.perc_', prev_timerange_suffix())]  %>% getPercentChangeSpan()})
+    valuePrefix <- ifelse(!is.null(metric$currency), paste0(metric$currency, " "), "")
+      
     output$metricSummary <- renderUI({
       glue(
-        '<span class="metric">$ {metric_total_value()}</span>
+        '<span class="metric">{valuePrefix}{metric_total_value()}</span>
         <div class="metric-bottom-row">
-          <span class="metric-label">{title}</span>
+          <span class="metric-label">{metric$title}</span>
           {metric_change()}
         </div>'
       ) %>% HTML()

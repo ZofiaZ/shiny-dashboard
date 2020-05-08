@@ -12,7 +12,6 @@ dygraphChart <-
            session,
            df,
            metric,
-           metric_name,
            y,
            m,
            previous_time_range) {
@@ -25,24 +24,26 @@ dygraphChart <-
     }
     
     output$dygraph <- renderDygraph({
-        metric_change_key <- paste0(metric, ".change_", previous_time_range())
+        metric_change_key <- paste0(metric()$id, ".change_", previous_time_range())
+        metric_suffix <- ifelse(!is.null(metric()$currency), glue(" ({metric()$currency})"), "")
+        metric_legend <- paste0(metric()$legend, metric_suffix)
         
       if (m() == "0") {
-        subset <- getMonthlyDataByYear(df, y(), metric=c(metric, metric_change_key))
+        subset <- getMonthlyDataByYear(df, y(), metric=c(metric()$id, metric_change_key))
         diff_label = "prev year diff"
       } else {
-        subset <- getSubsetByTimeRange(df, y(), m(), metric=c(metric, metric_change_key))
-        diff_label = ifelse(previous_time_range()=="prev_year", "prev year diff", "prev month diff")
+        subset <- getSubsetByTimeRange(df, y(), m(), metric=c(metric()$id, metric_change_key))
+        diff_label = ifelse(previous_time_range()=="prev_year", "change to prev. year", "change to prev. month")
       }
         
-      data <- xts(x = select(subset, c(metric, metric_change_key)), order.by = subset$date)
+      data <- xts(x = select(subset, c(metric()$id, metric_change_key)), order.by = subset$date)
       
       dygraph(data) %>%
         dyBarChart() %>%
-        dyAxis("y", label = metric_name, axisLabelWidth = 40) %>%
+        dyAxis("y", label = metric_legend, axisLabelWidth = 40) %>%
         dyAxis("x", drawGrid = FALSE) %>%
-        dySeries(metric, label = metric_name, color = "rgba(41,190,216,1)") %>%
-        dySeries(metric_change_key, label = diff_label, color = "rgba(248,216,77,0.8)") %>%
+        dySeries(metric()$id, label = metric_legend, color = "rgba(41,190,216,1)") %>%
+        dySeries(metric_change_key, label = diff_label, color = "rgba(248,216,77,0.95)") %>%
         dyOptions(
           includeZero = TRUE,
           axisLineColor = "#585858",
