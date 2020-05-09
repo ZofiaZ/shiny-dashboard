@@ -4,6 +4,7 @@ library(glue)
 
 source("./functions/getDiffValues.R")
 source("./functions/getDataByTimeRange.R")
+source("./functions/getMetricsOptions.R")
 
 daily_stats <-
   read.csv("data/daily_stats.csv",
@@ -88,46 +89,50 @@ server <- function(input, output, session) {
 
   callModule(
     module = metricSummary,
-    id = "profit",
-    yearly_df = yearly_stats,
+    id = "sales_summary",
+    choices=c("profit", "revenue", "orders_count"),
     monthly_df = monthly_stats,
-    metric = metrics_list$profit,
+    yearly_df = yearly_stats,
     y = selected_year,
     m = selected_month,
-    previous_time_range = previous_time_range
+    previous_time_range = previous_time_range,
+    screen_readers_label="Select sales-related metric"
   )
 
   callModule(
     module = metricSummary,
-    id = "users",
-    yearly_df = yearly_stats,
+    id = "production_summary",
+    choices = c("cost", "produced_items"),
     monthly_df = monthly_stats,
-    metric = metrics_list$users,
+    yearly_df = yearly_stats,
     y = selected_year,
     m = selected_month,
-    previous_time_range = previous_time_range
+    previous_time_range = previous_time_range,
+    screen_readers_label="Select production-related metric"
   )
 
   callModule(
     module = metricSummary,
-    id = "orders_count",
+    id = "users_summary",
+    choices=c("users_active", "users_dropped_out"),
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
-    metric = metrics_list$orders_count,
     y = selected_year,
     m = selected_month,
-    previous_time_range = previous_time_range
+    previous_time_range = previous_time_range,
+    screen_readers_label="Select users-related metric"
   )
 
   callModule(
     module = metricSummary,
-    id = "complaints",
+    id = "complaints_summary",
+    choices=c("complaints_opened", "complaints_closed"),
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
-    metric = metrics_list$complaints,
     y = selected_year,
     m = selected_month,
-    previous_time_range = previous_time_range
+    previous_time_range = previous_time_range,
+    screen_readers_label="Select complaints-related metric"
   )
 
   callModule(
@@ -141,7 +146,7 @@ server <- function(input, output, session) {
 
   callModule(
     module = choroplethMap,
-    id = "country_map",
+    id = "map",
     df = countries_stats,
     countries_geo_data = countries_geo_data,
     y = selected_year,

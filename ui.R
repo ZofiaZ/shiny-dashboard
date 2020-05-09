@@ -18,10 +18,10 @@ htmlTemplate(
     choices = list("Previous Year" = "prev_year", "Previous Month" = "prev_month"),
     selected = "prev_year"
   ),
-  profitSummary = metricSummaryOutput("profit"),
-  usersSummary = metricSummaryOutput("users"),
-  ordersCountSummary = metricSummaryOutput("orders_count"),
-  complaintsSummary = metricSummaryOutput("complaints"),
+  salesSummary = metricSummaryOutput("sales_summary"),
+  productionSummary = metricSummaryOutput("production_summary"),
+  usersSummary = metricSummaryOutput("users_summary"),
+  complaintsSummary = metricSummaryOutput("complaints_summary"),
   timeChart = dygraphChartOutput("time_chart"),
-  countryMap = choroplethMapOutput("country_map")
+  countryMap = choroplethMapOutput("map")
 )

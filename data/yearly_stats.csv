@@ -1,5 +1,5 @@
-"","date","revenue","cost","profit","orders_count","produced_items","users","complaints","profit.perc_prev_year","cost.perc_prev_year","orders_count.perc_prev_year","revenue.perc_prev_year","produced_items.perc_prev_year","users.perc_prev_year","complaints.perc_prev_year"
-"1",2018-01-01,965214,266658,698556,53623,38094,214492,32979,NA,NA,NA,NA,NA,NA,NA
-"2",2019-01-01,2087460,268632,1818828,115970,38376,463880,32905,160.37,0.74,116.27,116.27,0.74,116.27,-0.22
-"3",2020-01-01,971946,94388,877558,53997,13484,215988,11483,38.67,0.98,33.82,33.82,0.98,33.82,0.3
-"4",2021-01-01,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"","date","revenue","cost","profit","orders_count","produced_items","users_active","users_dropped_out","complaints_opened","complaints_closed","profit.perc_prev_year","cost.perc_prev_year","orders_count.perc_prev_year","revenue.perc_prev_year","produced_items.perc_prev_year","users_active.perc_prev_year","users_dropped_out.perc_prev_year","complaints_opened.perc_prev_year","complaints_closed.perc_prev_year"
+"1",2018-01-01,965214,266672,698542,53623,38096,214492,107194,32979,28585,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"2",2019-01-01,2087460,268604,1818856,115970,38372,463880,231906,32905,28526,160.38,0.72,116.27,116.27,0.72,116.27,116.34,-0.22,-0.21
+"3",2020-01-01,971946,94472,877474,53997,13496,215988,107880,11483,9950,38.65,1.08,33.82,33.82,1.08,33.82,33.7,0.3,0.25
+"4",2021-01-01,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

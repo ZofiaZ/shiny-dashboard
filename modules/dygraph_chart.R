@@ -1,19 +1,25 @@
 library(dygraphs)
 library(xts)
 
+time_metrics <- names(metrics_list) # add all available metrics to dygraph chart
+choices <- list("Select" = "") %>% c(getMetricsOptions(time_metrics, metrics_list))
+
 dygraphChartOutput <- function(id) {
   ns <- NS(id)
-
   tagList(
-    tags$div(class = "tile-header", 
-        selectInput(
-      ns("metric"), "Metric",
-      list("Select" = "", "Production Costs" = "cost", "Profit" = "profit", "Orders" = "orders_count"),
-      width = NULL,
-      selectize = FALSE
-    )),
-    tags$div(class="time-chart-container",
-      dygraphOutput(ns("dygraph"), height = "200px"))
+    tags$div(
+      class = "tile-header",
+      selectInput(
+        ns("metric"), "Metric",
+        choices,
+        width = NULL,
+        selectize = FALSE
+      )
+    ),
+    tags$div(
+      class = "time-chart-container",
+      dygraphOutput(ns("dygraph"), height = "200px")
+    )
   )
 }
 

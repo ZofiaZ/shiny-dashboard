@@ -34,16 +34,28 @@ metrics_list <- list(
     currency = NULL,
     legend = "Produced items"
   ),
-  users = list(
-    id = "users",
+  users_active = list(
+    id = "users_active",
     title = "Active Users",
     currency = NULL,
     legend = "Active users"
   ),
-  complaints = list(
-    id = "complaints",
-    title = "Open Complaints",
+  users_dropped_out = list(
+    id = "users_dropped_out",
+    title = "Dropped Out Customers",
     currency = NULL,
-    legend = "Open complaints"
+    legend = "Dropped out customers"
+  ),
+  complaints_opened = list(
+    id = "complaints_opened",
+    title = "Opened Complaints",
+    currency = NULL,
+    legend = "Opened complaints"
+  ),
+  complaints_closed = list(
+    id = "complaints_closed",
+    title = "Closed Complaints",
+    currency = NULL,
+    legend = "Closed complaints"
   )
 )

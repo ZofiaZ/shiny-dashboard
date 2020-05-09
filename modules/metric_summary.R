@@ -2,48 +2,64 @@ library(dygraphs)
 
 metricSummaryOutput <- function(id) {
   ns <- NS(id)
-  uiOutput(ns("metricSummary"))
+  tagList(
+    uiOutput(ns("select")),
+    uiOutput(ns("summary"))
+  )
 }
 
 metricSummary <-
   function(input,
            output,
            session,
-           metric,
+           choices,
            monthly_df,
            yearly_df,
            y,
            m,
-           previous_time_range) {
-    df <- reactive({
-      if(m() == 0) {
-        yearly_df
-      } else {
-        monthly_df
-      }
+           previous_time_range,
+           screen_readers_label) {
+    metric <- reactive({
+      validate(need(input$metric != "", "select metric"))
+      metrics_list[[input$metric]]
     })
-    
-    selected_date <- reactive({paste(y(), ifelse(m()=="0", "1", m()), '01', 'sep' = '-') %>% as.Date() })
-    row <- reactive({ df()[df()$date == selected_date(),] })
-    prev_timerange_suffix <- reactive({
-      if(m() == 0) {
-        "prev_year"
-      } else {
-        previous_time_range()
-      }
+
+    output$select <- renderUI({
+      ns <- session$ns
+      selectInput(
+        ns("metric"),
+        screen_readers_label,
+        getMetricsOptions(choices, metrics_list),
+        width = NULL,
+        selectize = FALSE
+      )
     })
-    
-    metric_total_value <- reactive({ row()[,metric$id] })
-    metric_change <- reactive({ row()[,paste0(metric$id, '.perc_', prev_timerange_suffix())]  %>% getPercentChangeSpan()})
-    valuePrefix <- ifelse(!is.null(metric$currency), paste0(metric$currency, " "), "")
-      
-    output$metricSummary <- renderUI({
+
+    output$summary <- renderUI({
+      if (m() == 0) {
+        df <- yearly_df
+        prev_timerange_suffix <- "prev_year"
+      } else {
+        df <- monthly_df
+        prev_timerange_suffix <- previous_time_range()
+      }
+
+      selected_date <-
+        paste(y(), ifelse(m() == "0", "1", m()), "01", "sep" = "-") %>% as.Date()
+      row <- df[df$date == selected_date, ]
+
+      metric_total_value <- row[, metric()$id]
+      metric_change_span <-
+        row[, paste0(metric()$id, ".perc_", prev_timerange_suffix)] %>% getPercentChangeSpan()
+      valuePrefix <-
+        ifelse(!is.null(metric()$currency),
+          paste0(metric()$currency, " "),
+          ""
+        )
+
       glue(
-        '<span class="metric">{valuePrefix}{metric_total_value()}</span>
-        <div class="metric-bottom-row">
-          <span class="metric-label">{metric$title}</span>
-          {metric_change()}
-        </div>'
+        '<span class="metric">{valuePrefix}{metric_total_value}</span>
+        {metric_change_span}'
       ) %>% HTML()
     })
-    }
+  }

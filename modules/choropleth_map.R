@@ -1,17 +1,22 @@
 library(RColorBrewer)
 library(leaflet)
 
+map_metrics <- c("revenue", "profit", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
+choices <- list("Select" = "") %>% c(getMetricsOptions(time_metrics, metrics_list))
+
 choroplethMapOutput <- function(id) {
   ns <- NS(id)
-  
+
   tagList(
-    tags$div(class = "tile-header",
-    selectInput(
-      ns("metric"), "Metric",
-      list("Select" = "", "Sales Revenue" = "revenue", "Orders count" = "orders_count"),
-      width = NULL,
-      selectize = FALSE
-    )), #TODO add by country title
+    tags$div(
+      class = "tile-header",
+      selectInput(
+        ns("metric"), "Metric",
+        choices,
+        width = NULL,
+        selectize = FALSE
+      )
+    ), # TODO add by country title
     leafletOutput(ns("choroplethCountryMap"))
   )
 }
@@ -34,7 +39,7 @@ choroplethMap <-
       validate(need(input$metric != "", "select metric"))
       metrics_list[[input$metric]]
     })
-    
+
     countries_df <- reactive({
       getCountriesDataByDate(df, y(), m(), metric()$id, sum)
     })
@@ -76,7 +81,7 @@ choroplethMap <-
             style = list("font-weight" = "normal", padding = "3px 8px"),
             textsize = "13px",
             direction = "auto"
-            #TODO move to scss
+            # TODO move to scss
           )
         )
     })
