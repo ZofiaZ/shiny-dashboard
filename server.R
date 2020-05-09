@@ -2,9 +2,7 @@ library(dplyr)
 library(lubridate)
 library(glue)
 
-source("./functions/getDiffValues.R")
 source("./functions/getDataByTimeRange.R")
-source("./functions/getMetricsOptions.R")
 
 daily_stats <-
   read.csv("data/daily_stats.csv",

@@ -14,27 +14,19 @@ getSubsetByTimeRange <- function(df, y, m = NULL, metric) {
   }
 }
 
-getMetricByTimeRange <- function(df, y, m = NULL, metric, f, to_date_limit=NULL) {
-  filtered_df = getSubsetByTimeRange(df, y, m, metric)
-  
-  if (nrow(filtered_df) == 0)
-    0
-  else {
-    f(filtered_df[metric])
-  }
-}
-
-getMonthlyDataByYear  <- function(df, y, metric) {
+getMonthlyDataByYear <- function(df, y, metric) {
   getSubsetByTimeRange(df, y, m = NULL, metric) %>%
-    mutate(date = floor_date(date, "month") ) %>%
+    mutate(date = floor_date(date, "month")) %>%
     group_by(date) %>%
-    summarize_at(.vars = c(metric), .funs = sumNonNAValues)
+    summarize_at(.vars = c(metric), .funs = sumAllNonNAValues)
 }
 
-sumNonNAValues <- function(v) {
-  if (length(v[!is.na(v)]) == 0) {
-    return(NA)
+sumAllNonNAValues <- function(v) {
+  if (length(v[!is.na(v)]) != 0) {
+    sum(v, na.rm = TRUE)
   } else {
-    sum(v, na.rm=TRUE)
+    # return NA instead of 0 if all months data is missing
+    # (eg. future months needed for nicer 'current year' dygraph display)
+    return(NA)
   }
 }

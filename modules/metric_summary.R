@@ -1,4 +1,5 @@
 library(dygraphs)
+source("./functions/getPercentChangeSpan.R")
 
 metricSummaryOutput <- function(id) {
   ns <- NS(id)
@@ -29,7 +30,7 @@ metricSummary <-
       selectInput(
         ns("metric"),
         screen_readers_label,
-        getMetricsOptions(choices, metrics_list),
+        getMetricsChoices(choices, metrics_list),
         width = NULL,
         selectize = FALSE
       )

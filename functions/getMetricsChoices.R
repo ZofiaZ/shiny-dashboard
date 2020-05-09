@@ -1,4 +1,4 @@
-getMetricsOptions <- function(available_metrics, metrics_list) {
+getMetricsChoices <- function(available_metrics, metrics_list) {
   choices <- metrics_list[available_metrics]
 
   keys <- choices %>%

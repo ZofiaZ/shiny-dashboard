@@ -1,22 +1,26 @@
 library(RColorBrewer)
 library(leaflet)
 
-map_metrics <- c("revenue", "profit", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
-choices <- list("Select" = "") %>% c(getMetricsOptions(time_metrics, metrics_list))
-
 choroplethMapOutput <- function(id) {
   ns <- NS(id)
+
+  # select metrics that are available per country:
+  map_metrics <- c("revenue", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
+  choices <- list("Select" = "") %>% c(getMetricsChoices(map_metrics, metrics_list))
 
   tagList(
     tags$div(
       class = "tile-header",
-      selectInput(
-        ns("metric"), "Metric",
-        choices,
-        width = NULL,
-        selectize = FALSE
+      tagList(
+        selectInput(
+          ns("metric"), "Select metric for the choropleth map",
+          choices,
+          width = NULL,
+          selectize = FALSE
+        ),
+        tags$span("by country")
       )
-    ), # TODO add by country title
+    ),
     leafletOutput(ns("choroplethCountryMap"))
   )
 }
