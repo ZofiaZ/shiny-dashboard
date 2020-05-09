@@ -4,17 +4,33 @@
 
   .tile-header {
     background-color: $white;
-    padding: $spacingSm;
 
-    @include mediaFrom($breakSm) {
-      padding-left: $spacingMd;
-      padding-right: $spacingMd;
+    label {
+      @include visuallyHidden;
+    }
+
+    .shiny-input-container {
+      width: auto;
+
+      > div {
+        @include dropdown;
+
+        select {
+          padding: $spacingSm;
+
+          @include mediaFrom($breakSm) {
+            padding-left: $spacingMd;
+            padding-right: $spacingMd;
+          }
+        }
+      }
     }
   }
 
   .tile-title {
-    font-weight: 500;
-    font-size: rem(12px);
-    text-transform: uppercase;
+    @include title;
+
+    padding-top: $spacingSm;
+    padding-bottom: $spacingSm;
   }
 }

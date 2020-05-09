@@ -1,0 +1,78 @@
+.tile-metricSummary {
+  $infoBoxHeight: rem(64px);
+
+  @include tile;
+  @include gridWidth(12/12, 6/12, 3/12);
+  flex-grow: 1;
+  margin: $gutterXs / 2;
+  position: relative;
+
+  label {
+    @include visuallyHidden;
+  }
+
+  .shiny-input-container {
+    background-color: $white;
+    width: 100%;
+
+    > div {
+      @include dropdown;
+
+      select {
+        padding: $spacingSm;
+
+        @include mediaFrom($breakSm) {
+          padding-left: $spacingMd;
+          padding-right: $spacingMd;
+        }
+      }
+    }
+  }
+
+  .shiny-html-output {
+    padding: $spacingSm $spacingSm $spacingSm rem(60px);
+    height: $infoBoxHeight;
+
+    @include mediaFrom($breakSm) {
+      padding-left: rem(80px);
+      padding-right: $spacingMd;
+    }
+  }
+
+  .icon {
+    $size: rem(40px);
+
+    display: block;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $size;
+    width: $size;
+    position: absolute;
+    left: rem(15px);
+    bottom: $infoBoxHeight / 2;
+    transform: translateY(50%);
+  }
+
+  .material-icons {
+    color: $greyDark;
+    font-size: rem(35px);
+  }
+
+  .metric {
+    display: block;
+    font-size: rem(18px);
+    margin-bottom: rem(4px);
+
+    @include mediaFrom($breakSm) {
+      font-size: rem(22px);
+    }
+  }
+
+  // &.users .icon {
+  //   color: $colorUsers;
+  //   border-color: $colorUsers;
+  // }
+}

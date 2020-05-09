@@ -13,6 +13,14 @@ html {
   box-sizing: inherit;
 }
 
+*:focus {
+  outline: none;
+}
+
+.userTabbed *:focus {
+  outline: 2px solid $blue;
+}
+
 .page-main-content {
   @include outerContainer;
 }

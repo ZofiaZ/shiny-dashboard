@@ -48,6 +48,82 @@
   }
 }
 
+@mixin visuallyHidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 @mixin tile {
   box-shadow: $boxShadow;
+  // border-radius: $borderRadius;
+}
+
+@mixin title {
+  font-weight: 500;
+  font-size: rem(10px);
+  text-transform: uppercase;
+
+  @include mediaFrom($breakSm) {
+    font-size: rem(12px);
+  }
+}
+
+@mixin dropdown {
+  @include title;
+
+  width: 100%;
+  background: $white;
+  border: rem(2px) solid $white;
+  border-radius: 0;
+  color: $greyDark;
+  display: flex;
+  align-items: center;
+  min-height: rem(20px);
+  position: relative;
+
+  .userTabbed &:focus-within {
+    border-color: $blue;
+  }
+
+  &::after {
+    $size: 8px;
+    $border: rem(2px) solid $greyDark;
+
+    content: "";
+    display: block;
+    border-right: $border;
+    border-bottom: $border;
+    height: $size;
+    width: $size;
+    position: absolute;
+    right: rem(20px);
+    pointer-events: none;
+    top: 50%;
+    transform: rotate(45deg) translateY(-100%);
+  }
+
+  select {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    appearance: none;
+    background: inherit;
+    border: none;
+    padding-right: rem(25px);
+    padding-top: rem(5px);
+    padding-bottom: rem(5px);
+
+    .userTabbed &:focus {
+      outline: none;
+    }
+  }
 }

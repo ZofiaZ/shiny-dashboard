@@ -32,7 +32,10 @@ $colorBackground: $beigeLight;
 $colorFont: $greyDark;
 
 // box shadow
-$boxShadow: 7px 7px 7px -3px transparentize($greyDark, 0.7);
+$boxShadow: 5px 5px 5px -3px transparentize($greyDark, 0.7);
+
+// border radius
+$borderRadius: 4px;
 
 // spacings
 $spacingSm: rem(8px);
