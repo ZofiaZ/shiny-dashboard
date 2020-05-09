@@ -4,7 +4,7 @@ library(leaflet)
 choroplethMapOutput <- function(id) {
   ns <- NS(id)
 
-  # select metrics that are available per country:
+  # select only those metrics that are available per country:
   map_metrics <- c("revenue", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
   choices <- list("Select" = "") %>% c(getMetricsChoices(map_metrics, metrics_list))
 
@@ -50,16 +50,14 @@ choroplethMap <-
 
 
     output$choroplethCountryMap <- renderLeaflet({
-      # Create a color palette for the map
       map_palette <-
-        colorQuantile(
+        colorQuantile( # TODO change to more represenative palletter
           palette = colorRampPalette(c("#f8d84d", "#bdd64b"))(6),
           domain = countries_df()[[metric()$id]],
           6,
           na.color = "transparent"
         )
 
-      # Prepare the text for tooltips:
       metric_prefix <- ifelse(!is.null(metric()$currency), metric()$currency, "")
       tooltip <- glue(
         "<h4>{countries_df()$country}</h4>

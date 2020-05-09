@@ -1,4 +1,4 @@
-# settings (for generating sample data and shiny app)
+# common variables for generating sample data and shiny app (ui & server)
 
 data_last_day <- "2020-05-07" %>% as.Date()
 data_first_day <- "2018-01-01" %>% as.Date()
@@ -59,3 +59,5 @@ metrics_list <- list(
     legend = "Closed complaints"
   )
 )
+
+prev_time_range_choices <- list("Previous Year" = "prev_year", "Previous Month" = "prev_month")
