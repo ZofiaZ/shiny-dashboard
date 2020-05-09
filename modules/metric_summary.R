@@ -1,10 +1,19 @@
 library(dygraphs)
 source("./functions/getPercentChangeSpan.R")
 
+
 metricSummaryOutput <- function(id) {
   ns <- NS(id)
+  
+  choices <- list("Loading..." = "") %>% c(getMetricsChoicesByCategory(id))
+
   tagList(
-    uiOutput(ns("select")),
+    selectInput(
+      ns("summary_metric"), "Metric",
+      choices,
+      width = NULL,
+      selectize = FALSE
+    ),
     uiOutput(ns("summary"))
   )
 }
@@ -13,7 +22,6 @@ metricSummary <-
   function(input,
            output,
            session,
-           choices,
            monthly_df,
            yearly_df,
            y,
@@ -21,19 +29,8 @@ metricSummary <-
            previous_time_range,
            screen_readers_label) {
     metric <- reactive({
-      validate(need(input$metric != "", "select metric"))
-      metrics_list[[input$metric]]
-    })
-
-    output$select <- renderUI({
-      ns <- session$ns
-      selectInput(
-        ns("metric"),
-        screen_readers_label,
-        getMetricsChoices(choices, metrics_list),
-        width = NULL,
-        selectize = FALSE
-      )
+      validate(need(input$summary_metric != "", "select metric"))
+      metrics_list[[input$summary_metric]]
     })
 
     output$summary <- renderUI({

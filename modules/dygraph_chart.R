@@ -5,7 +5,7 @@ dygraphChartOutput <- function(id) {
   ns <- NS(id)
 
   time_metrics <- names(metrics_list) # add all available metrics to dygraph chart
-  choices <- list("Select" = "") %>% c(getMetricsChoices(time_metrics, metrics_list))
+  choices <- list("Loading..." = "") %>% c(getMetricsChoices(time_metrics, metrics_list))
 
   tagList(
     tags$div(

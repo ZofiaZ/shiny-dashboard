@@ -6,7 +6,7 @@ choroplethMapOutput <- function(id) {
 
   # select only those metrics that are available per country:
   map_metrics <- c("revenue", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
-  choices <- list("Select" = "") %>% c(getMetricsChoices(map_metrics, metrics_list))
+  choices <- list("Loading..." = "") %>% c(getMetricsChoices(map_metrics, metrics_list))
 
   tagList(
     tags$div(

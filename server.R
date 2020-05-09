@@ -87,8 +87,7 @@ server <- function(input, output, session) {
 
   callModule(
     module = metricSummary,
-    id = "sales_summary",
-    choices=c("profit", "revenue", "orders_count"),
+    id = "sales",
     monthly_df = monthly_stats,
     yearly_df = yearly_stats,
     y = selected_year,
@@ -99,8 +98,7 @@ server <- function(input, output, session) {
 
   callModule(
     module = metricSummary,
-    id = "production_summary",
-    choices = c("cost", "produced_items"),
+    id = "production",
     monthly_df = monthly_stats,
     yearly_df = yearly_stats,
     y = selected_year,
@@ -111,8 +109,7 @@ server <- function(input, output, session) {
 
   callModule(
     module = metricSummary,
-    id = "users_summary",
-    choices=c("users_active", "users_dropped_out"),
+    id = "users",
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
     y = selected_year,
@@ -123,8 +120,7 @@ server <- function(input, output, session) {
 
   callModule(
     module = metricSummary,
-    id = "complaints_summary",
-    choices=c("complaints_opened", "complaints_closed"),
+    id = "complaints",
     yearly_df = yearly_stats,
     monthly_df = monthly_stats,
     y = selected_year,

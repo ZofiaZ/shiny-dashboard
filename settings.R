@@ -8,54 +8,63 @@ metrics_list <- list(
     id = "revenue",
     title = "Sales Revenue",
     currency = "$",
+    category= "sales",
     legend = "Revenue"
   ),
   cost = list(
     id = "cost",
     title = "Production Costs",
     currency = "$",
+    category= "production",
     legend = "Cost"
   ),
   profit = list(
     id = "profit",
     title = "Profit",
     currency = "$",
+    category= "sales",
     legend = "Profit"
   ),
   orders_count = list(
     id = "orders_count",
     title = "Orders",
     currency = NULL,
+    category= "sales",
     legend = "Number of orders"
   ),
   produced_items = list(
     id = "produced_items",
     title = "Produced Items",
     currency = NULL,
+    category= "production",
     legend = "Produced items"
   ),
   users_active = list(
     id = "users_active",
     title = "Active Users",
     currency = NULL,
+    category= "users",
     legend = "Active users"
   ),
   users_dropped_out = list(
     id = "users_dropped_out",
     title = "Dropped Out Customers",
     currency = NULL,
+    category= "users",
     legend = "Dropped out customers"
   ),
   complaints_opened = list(
     id = "complaints_opened",
     title = "Opened Complaints",
     currency = NULL,
+    category= "complaints",
     legend = "Opened complaints"
   ),
   complaints_closed = list(
     id = "complaints_closed",
     title = "Closed Complaints",
     currency = NULL,
+    category= "complaints",
     legend = "Closed complaints"
   )
 )

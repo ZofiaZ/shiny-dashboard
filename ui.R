@@ -20,10 +20,10 @@ htmlTemplate(
     choices = prev_time_range_choices,
     selected = "prev_year"
   ),
-  salesSummary = metricSummaryOutput("sales_summary"),
-  productionSummary = metricSummaryOutput("production_summary"),
-  usersSummary = metricSummaryOutput("users_summary"),
-  complaintsSummary = metricSummaryOutput("complaints_summary"),
+  salesSummary = metricSummaryOutput("sales"),
+  productionSummary = metricSummaryOutput("production"),
+  usersSummary = metricSummaryOutput("users"),
+  complaintsSummary = metricSummaryOutput("complaints"),
   timeChart = dygraphChartOutput("time_chart"),
   countryMap = choroplethMapOutput("map")
 )
