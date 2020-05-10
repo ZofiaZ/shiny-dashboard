@@ -24,6 +24,7 @@
 - prevent errors & handle edge cases
 - separate `data processing` (for example: calculating change values with normalization based on number of days) from `sample data generation` script. Create data processing functions that operate on vectors (avoid multiple mapply). Add data processing to app (outside server function call).
 - learn about R designs patterns & best practices and apply them in R shiny app
+- learn about different libraries in R and include them more conciously in the app :)
 - add tests
 
 ## Bugfixing
