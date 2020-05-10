@@ -23,8 +23,16 @@ p {
 
 .positive-change {
   color: $green;
+
+  &.inverted-colors {
+    color: $red;
+  }
 }
 
 .negative-change {
   color: $red;
+
+  &.inverted-colors {
+    color: $green;
+  }
 }

@@ -1,4 +1,4 @@
-getPercentChangeSpan <- function(changeValue) {
+getPercentChangeSpan <- function(changeValue, invert_colors = NULL) {
   if (is.na(changeValue)) {
     return("<span class='change-value no-data'>NA*</span>")
   }
@@ -12,8 +12,12 @@ getPercentChangeSpan <- function(changeValue) {
     CSSclass <- "change-value negative-change"
     sign <- ""
   } else {
-    CSSclass <- " change-value zero-change"
+    CSSclass <- "change-value zero-change"
     sign <- ""
+  }
+  
+  if (!is.null(invert_colors) && invert_colors == TRUE) {
+    CSSclass <- paste(CSSclass, "inverted-colors")
   }
 
   glue("<span class='{CSSclass}'> {sign}{changeValue}%</span>")

@@ -32,7 +32,7 @@ metricSummary <-
       validate(need(input$summary_metric != "", "select metric"))
       metrics_list[[input$summary_metric]]
     })
-
+    
     output$summary <- renderUI({
       if (m() == 0) {
         df <- yearly_df
@@ -47,8 +47,11 @@ metricSummary <-
       row <- df[df$date == selected_date, ]
 
       metric_total_value <- row[, metric()$id]
+      
+      invert_colors <- metrics_list[[metric()$id]]$invert_colors
       metric_change_span <-
-        row[, paste0(metric()$id, ".perc_", prev_timerange_suffix)] %>% getPercentChangeSpan()
+        row[, paste0(metric()$id, ".perc_", prev_timerange_suffix)] %>% getPercentChangeSpan(invert_colors)
+      
       valuePrefix <-
         ifelse(!is.null(metric()$currency),
           paste0(metric()$currency, " "),

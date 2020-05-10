@@ -1,6 +1,6 @@
 # common variables for generating sample data and shiny app (ui & server)
 
-data_last_day <- "2020-05-07" %>% as.Date()
+data_last_day <- "2020-05-10" %>% as.Date()
 data_first_day <- "2018-01-01" %>% as.Date()
 
 metrics_list <- list(
@@ -16,7 +16,8 @@ metrics_list <- list(
     title = "Production Costs",
     currency = "$",
     category= "production",
-    legend = "Cost"
+    legend = "Cost",
+    invert_colors = TRUE
   ),
   profit = list(
     id = "profit",
@@ -58,7 +59,8 @@ metrics_list <- list(
     title = "Opened Complaints",
     currency = NULL,
     category= "complaints",
-    legend = "Opened complaints"
+    legend = "Opened complaints",
+    invert_colors = TRUE
   ),
   complaints_closed = list(
     id = "complaints_closed",
