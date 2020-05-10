@@ -1,7 +1,9 @@
 # common variables for generating sample data and shiny app (ui & server)
 
+library(dplyr)
+
 data_last_day <- "2020-05-10" %>% as.Date()
-data_first_day <- "2018-01-01" %>% as.Date()
+data_first_day <- "2016-01-01" %>% as.Date()
 
 metrics_list <- list(
   revenue = list(
@@ -49,10 +51,11 @@ metrics_list <- list(
   ),
   users_dropped_out = list(
     id = "users_dropped_out",
-    title = "Dropped Out Customers",
+    title = "Dropped Out Users",
     currency = NULL,
     category= "users",
-    legend = "Dropped out customers"
+    legend = "Dropped out users",
+    invert_colors = TRUE
   ),
   complaints_opened = list(
     id = "complaints_opened",

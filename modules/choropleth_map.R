@@ -6,7 +6,7 @@ choroplethMapOutput <- function(id) {
 
   # select only those metrics that are available per country:
   map_metrics <- c("revenue", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
-  choices <- list("Loading..." = "") %>% c(getMetricsChoices(map_metrics, metrics_list, suffix="by country"))
+  choices <- list("Loading..." = "") %>% c(getMetricsChoices(map_metrics, metrics_list, suffix = "by country"))
 
   tagList(
     tags$div(
@@ -48,8 +48,8 @@ choroplethMap <-
 
     output$choroplethCountryMap <- renderLeaflet({
       map_palette <-
-        colorQuantile( # TODO change to more represenative palletter
-          palette = colorRampPalette(c("#f8d84d", "#bdd64b"))(6),
+        colorBin( # TODO change to more represenative pallette
+          palette = colorRampPalette(c("#f8d84d", "#fae79a", "#bcc2c5"))(6),
           domain = countries_df()[[metric()$id]],
           6,
           na.color = "transparent"
