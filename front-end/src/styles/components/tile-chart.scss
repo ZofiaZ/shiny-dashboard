@@ -26,11 +26,4 @@
       }
     }
   }
-
-  .tile-title {
-    @include title;
-
-    padding-top: $spacingSm;
-    padding-bottom: $spacingSm;
-  }
 }

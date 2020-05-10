@@ -1,0 +1,17 @@
+// temporary style for "profit by product type" - to remove
+
+.breakdown-chart {
+  .tile-title {
+    @include dropdown;
+    padding: $spacingSm;
+
+    @include mediaFrom($breakSm) {
+      padding-left: $spacingMd;
+      padding-right: $spacingMd;
+    }
+  }
+
+  .todo {
+    height: rem(96px);
+  }
+}
