@@ -49,7 +49,7 @@ choroplethMap <-
     output$choroplethCountryMap <- renderLeaflet({
       map_palette <-
         colorBin( # TODO change to more represenative pallette
-          palette = colorRampPalette(c("#f8d84d", "#fae79a", "#bcc2c5"))(6),
+          palette = colorRampPalette(c("#bcc2c5", "#f8d84d"))(6),
           domain = countries_df()[[metric()$id]],
           6,
           na.color = "transparent"

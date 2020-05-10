@@ -3,7 +3,7 @@
 library(dplyr)
 
 data_last_day <- "2020-05-10" %>% as.Date()
-data_first_day <- "2016-01-01" %>% as.Date()
+data_first_day <- "2015-01-01" %>% as.Date()
 
 metrics_list <- list(
   revenue = list(
