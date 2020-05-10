@@ -48,7 +48,6 @@
 
 @mixin tile {
   box-shadow: $boxShadow;
-  // border-radius: $borderRadius;
 }
 
 @mixin title {
@@ -100,6 +99,7 @@
     font-size: inherit;
     font-weight: inherit;
     text-transform: inherit;
+    font-family: inherit;
     appearance: none;
     background: inherit;
     border: none;

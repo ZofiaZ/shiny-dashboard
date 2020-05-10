@@ -1,6 +1,6 @@
 .time-chart {
   .time-chart-container {
-    padding: 40px 10px 10px;
+    padding: rem(40px) rem(10px) rem(10px);
   }
 
   .dygraph-label {
@@ -10,6 +10,14 @@
   .dygraph-legend {
     // overwrite dygraph inline styles
     background-color: transparent !important;
-    top: -30px !important;
+    top: rem(-30px) !important;
+    left: rem(10px) !important;
+    width: 100% !important;
+
+    > span {
+      margin-left: rem(5px);
+      margin-right: rem(10px);
+      display: inline-block;
+    }
   }
 }
