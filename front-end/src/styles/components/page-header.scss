@@ -11,18 +11,18 @@ $breakInline: $breakMd;
 
   @include mediaFrom($breakInline) {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .page-title {
     font-size: rem(20px);
-    text-align: center;
     font-weight: 500;
-    line-height: rem(30px);
+    line-height: 1;
     margin-bottom: $spacingMd;
+    flex-shrink: 0;
 
     @include mediaFrom($breakInline) {
-      text-align: left;
-      margin-bottom: 0;
+      margin-right: rem(40px);
     }
   }
 }

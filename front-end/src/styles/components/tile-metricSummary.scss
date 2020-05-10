@@ -1,11 +1,19 @@
 .tile-metricSummary {
-  $infoBoxHeight: rem(64px);
+  $infoBoxHeight: rem(84px);
 
   @include tile;
-  @include gridWidth(12/12, 6/12, 3/12);
+  @include gridWidth(12/12);
   flex-grow: 1;
-  margin: $gutterXs / 2;
+  margin: $gutter / 2;
   position: relative;
+
+  @include mediaFrom($breakSm) {
+    @include gridWidth(6/12);
+  }
+
+  @include mediaFrom($breakLg) {
+    @include gridWidth(3/12);
+  }
 
   label {
     @include visuallyHidden;
@@ -30,49 +38,59 @@
   }
 
   .shiny-html-output {
-    padding: $spacingSm $spacingSm $spacingSm rem(60px);
+    padding: $spacingSm $spacingMd $spacingSm rem(90px);
     height: $infoBoxHeight;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     @include mediaFrom($breakSm) {
       padding-left: rem(80px);
       padding-right: $spacingMd;
     }
+
+    @include mediaFrom($breakLg) {
+      flex-wrap: wrap;
+    }
   }
 
   .icon {
-    $size: rem(40px);
-
     display: block;
-    border: 2px solid transparent;
-    border-radius: 50%;
+    border-right: rem(2px) solid $greyLight;
+    padding-right: rem(20px);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: $size;
-    width: $size;
+    height: rem(30px);
+    width: rem(30px);
     position: absolute;
-    left: rem(15px);
+    left: rem(35px);
     bottom: $infoBoxHeight / 2;
     transform: translateY(50%);
   }
 
   .material-icons {
     color: $greyDark;
-    font-size: rem(35px);
+    font-size: rem(25px);
   }
 
   .metric {
-    display: block;
-    font-size: rem(18px);
+    display: inline-block;
+    font-size: rem(20px);
     margin-bottom: rem(4px);
 
-    @include mediaFrom($breakSm) {
+    @include mediaFrom($breakLg) {
       font-size: rem(22px);
     }
   }
 
-  // &.users .icon {
-  //   color: $colorUsers;
-  //   border-color: $colorUsers;
-  // }
+  .change-value {
+    font-size: rem(16px);
+
+    @include mediaFrom($breakSm) {
+      position: absolute;
+      right: rem(12px);
+      bottom: rem(12px);
+    }
+  }
 }

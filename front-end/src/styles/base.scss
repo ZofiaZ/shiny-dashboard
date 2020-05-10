@@ -29,11 +29,15 @@ html {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-left: $gutterXs / -2;
-  margin-right: $gutterXs / -2;
+  margin-left: $gutter / -2;
+  margin-right: $gutter / -2;
 }
 
 .subsection {
-  @include gridWidth(12/12, 6/12);
-  margin: $gutterXs / 2;
+  @include gridWidth(12/12);
+  margin: $gutter / 2;
+
+  @include mediaFrom($breakLg) {
+    @include gridWidth(6/12);
+  }
 }

@@ -1,7 +1,8 @@
-createOptionsList <- function(choices) {
+createOptionsList <- function(choices, suffix = "") {
   keys <- choices %>%
     lapply("[[", "title") %>%
-    unname()
+    unname() %>%
+    lapply(function(x) paste(x, suffix))
   
   values <- choices %>%
     lapply("[[", "id")
@@ -11,10 +12,10 @@ createOptionsList <- function(choices) {
 }
 
 
-getMetricsChoices <- function(available_metrics, metrics_list) {
-  metrics_list[available_metrics] %>% createOptionsList()
+getMetricsChoices <- function(available_metrics, metrics_list, suffix = "") {
+  metrics_list[available_metrics] %>% createOptionsList(suffix)
 }
 
-getMetricsChoicesByCategory <- function(category) {
-  Filter(function(x) x$category == category, metrics_list) %>% createOptionsList()
+getMetricsChoicesByCategory <- function(category, suffix = "") {
+  Filter(function(x) x$category == category, metrics_list) %>% createOptionsList(suffix)
 }

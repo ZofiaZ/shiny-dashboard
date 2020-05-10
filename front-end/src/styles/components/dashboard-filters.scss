@@ -3,18 +3,14 @@ $breakInline: $breakSm;
 .dashboard-filters {
   display: flex;
   flex-wrap: wrap;
-  // margin-left: $gutterXs / -2;
-  // margin-right: $gutterXs / -2;
-  // flex-grow: 1;
 
-  // @include mediaFrom($breakInline) {
-  //   height: rem(30px);
-  // }
+  label {
+    font-weight: 500;
 
-  // @include mediaFrom($breakMd) {
-  //   max-width: 450px;
-  // }
-
+    @include mediaFrom($breakInline) {
+      margin-right: $spacingSm;
+    }
+  }
   .time-selection {
     display: flex;
 
@@ -24,15 +20,12 @@ $breakInline: $breakSm;
       flex-direction: column;
       flex-grow: 1;
       margin-right: $spacingMd;
+      width: auto;
 
       @include mediaFrom($breakInline) {
         flex-direction: row;
         align-items: center;
       }
-    }
-
-    .shiny-input-container {
-      width: auto;
 
       > div {
         @include dropdown;
@@ -41,25 +34,53 @@ $breakInline: $breakSm;
         select {
           padding-left: rem(10px);
           padding-right: rem(30px);
+          font-size: rem(12px);
+          text-transform: none;
         }
+      }
+    }
+
+    label {
+      margin-bottom: rem(5px);
+
+      @include mediaFrom($breakInline) {
+        margin-bottom: 0;
       }
     }
   }
 
   .comparison {
     margin-top: 10px;
+    width: 100%;
 
     @include mediaFrom($breakInline) {
-      margin: 0;
       display: flex;
       align-items: center;
+      width: auto;
+    }
+
+    @include mediaFrom($breakMd) {
+      margin: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: rem(5px);
+
+      @include mediaFrom($breakSm) {
+        display: inline;
+      }
+
+      @include mediaFrom($breakMd) {
+        margin-top: 0;
+      }
     }
 
     .form-group {
       width: 100%;
 
-      @include mediaFrom($breakInline) {
-        width: rem(380px);
+      @include mediaFrom($breakMd) {
+        min-width: rem(380px);
       }
     }
 
@@ -73,12 +94,10 @@ $breakInline: $breakSm;
 
     .radio {
       display: inline-block;
-    }
-  }
 
-  label {
-    @include mediaFrom($breakInline) {
-      margin-right: $spacingSm;
+      label {
+        font-weight: 400;
+      }
     }
   }
 }

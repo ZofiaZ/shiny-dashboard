@@ -6,8 +6,7 @@ $breakXl: 1200px;
 
 // grid
 $maxContentWidth: rem(1500px);
-$gutterXs: rem(16px);
-$gutterLg: rem(24px);
+$gutter: rem(16px);
 
 // fonts
 $fontPrimary: "Maven Pro", sans-serif;
@@ -33,9 +32,6 @@ $colorFont: $greyDark;
 
 // box shadow
 $boxShadow: 5px 5px 5px -3px transparentize($greyDark, 0.7);
-
-// border radius
-$borderRadius: 4px;
 
 // spacings
 $spacingSm: rem(8px);

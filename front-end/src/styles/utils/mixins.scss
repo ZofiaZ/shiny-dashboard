@@ -27,25 +27,10 @@
   }
 }
 
-@mixin gridWidth($mobileWidth: "", $tabletWidth: "", $desktopWidth: "") {
+@mixin gridWidth($widthRatio: "") {
   // example usage for a component in a 12 column container:
-  // @include gridWidth(12/12, 8/12, 6/12);
-
-  @if $mobileWidth != "" {
-    width: calc(100% * #{$mobileWidth} - #{$gutterXs});
-  }
-
-  @if $tabletWidth != "" {
-    @include mediaFrom($breakSm) {
-      width: calc(100% * #{$tabletWidth} - #{$gutterXs});
-    }
-  }
-
-  @if $desktopWidth != "" {
-    @include mediaFrom($breakMd) {
-      width: calc(100% * #{$desktopWidth} - #{$gutterLg});
-    }
-  }
+  // @include gridWidth( 8/12);
+  width: calc(100% * #{$widthRatio} - #{$gutter});
 }
 
 @mixin visuallyHidden {
@@ -68,7 +53,7 @@
 
 @mixin title {
   font-weight: 500;
-  font-size: rem(10px);
+  font-size: rem(11px);
   text-transform: uppercase;
 
   @include mediaFrom($breakSm) {

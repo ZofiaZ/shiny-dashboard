@@ -1,18 +1,18 @@
 getPercentChangeSpan <- function(changeValue) {
   if (is.na(changeValue)) {
-    return("<span class='no-data'>NA*</span>")
+    return("<span class='change-value no-data'>NA*</span>")
   }
 
   changeValue <- round(changeValue, digits = 2)
 
   if (changeValue > 0) {
-    CSSclass <- "positive-change"
+    CSSclass <- "change-value positive-change"
     sign <- "+"
   } else if (changeValue < 0) {
-    CSSclass <- "negative-change"
+    CSSclass <- "change-value negative-change"
     sign <- ""
   } else {
-    CSSclass <- "zero-change"
+    CSSclass <- " change-value zero-change"
     sign <- ""
   }
 

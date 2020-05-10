@@ -6,19 +6,16 @@ choroplethMapOutput <- function(id) {
 
   # select only those metrics that are available per country:
   map_metrics <- c("revenue", "orders_count", "users_active", "users_dropped_out", "complaints_opened", "complaints_closed")
-  choices <- list("Loading..." = "") %>% c(getMetricsChoices(map_metrics, metrics_list))
+  choices <- list("Loading..." = "") %>% c(getMetricsChoices(map_metrics, metrics_list, suffix="by country"))
 
   tagList(
     tags$div(
       class = "tile-header",
-      tagList(
-        selectInput(
-          ns("metric"), "Select metric for the choropleth map",
-          choices,
-          width = NULL,
-          selectize = FALSE
-        ),
-        tags$span("by country")
+      selectInput(
+        ns("metric"), "Select metric for the choropleth map",
+        choices,
+        width = NULL,
+        selectize = FALSE
       )
     ),
     leafletOutput(ns("choroplethCountryMap"))
