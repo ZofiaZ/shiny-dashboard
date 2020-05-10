@@ -9,13 +9,15 @@
 - nice to have: custom time selection (date picker)
 
 ## UX & UI improvements:
-- `map` - display countries data up front (not as a tooltip visible only on hover)
+- `map` - display countries values up front (not as a tooltip visible only on hover)
+- `map` - create a better color pallette that is not dependent on data fluctuations
 - add `loaders`
 - format large numbers
 - `time chart` - consider changing bars to line chart and display current & previous values (instead of diff value)
 - `time chart` - improve hover look & feel and interaction
 - `time filters` - change previous time range radio buttons look & feel to nicer button switch
 - `all charts` - recalculate charts height based on viewport height (would be nice to fill all vertical space on large screens)
+- use different colors for metrics from different groups (for example: blue for sales data, green for users data, red for complaints)
 
 ## Technical:
 - learn about `data structures` in R & organize data in a better way
