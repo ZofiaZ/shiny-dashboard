@@ -1,28 +1,34 @@
-$breakInline: $breakMd;
-
 .page-header {
   @include outerContainer;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: $spacingMd;
-  padding-bottom: $spacingMd;
+  padding-top: $spacingLg;
 
-  @include mediaFrom($breakInline) {
+  @include mediaFrom($breakSm) {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+  }
+
+  @include mediaFrom($breakLg) {
+    flex-wrap: nowrap;
   }
 
   .page-title {
-    font-size: rem(20px);
+    font-size: rem(18px);
     font-weight: 500;
     line-height: 1;
     margin-bottom: $spacingMd;
     flex-shrink: 0;
 
-    @include mediaFrom($breakInline) {
+    @include mediaFrom($breakSm) {
       margin-right: rem(40px);
+    }
+
+    @include mediaFrom($breakXl) {
+      font-size: rem(24px);
     }
   }
 }

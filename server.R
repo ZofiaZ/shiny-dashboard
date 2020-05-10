@@ -59,8 +59,8 @@ server <- function(input, output, session) {
       updateRadioButtons(
         session,
         "previous_time_range",
-        choices = prev_time_range_choices[c("Previous Year")],
-        selected = "prev_year"
+        choices = prev_time_range_choices["Previous Year"],
+        selected = prev_time_range_choices[["Previous Year"]]
       )
     } else {
       updateRadioButtons(

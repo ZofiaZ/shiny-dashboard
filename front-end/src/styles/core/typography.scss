@@ -25,7 +25,8 @@ p {
   color: $green;
 
   &.inverted-colors {
-    color: $red;
+    // uncomment the line below to display growth in red (for metric were increase is a bad thing)
+    // color: $red;
   }
 }
 
@@ -33,6 +34,7 @@ p {
   color: $red;
 
   &.inverted-colors {
-    color: $green;
+    // uncomment the line below to display growth in red (for metric were decrease is a good thing)
+    // color: $green;
   }
 }

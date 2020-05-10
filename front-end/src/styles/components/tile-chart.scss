@@ -2,6 +2,10 @@
   @include tile;
   margin-bottom: $spacingMd;
 
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
   .tile-header {
     background-color: $white;
 

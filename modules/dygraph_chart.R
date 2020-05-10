@@ -61,7 +61,7 @@ dygraphChart <- function(input,
 
     dygraph(data) %>%
       dy_bar_chart() %>%
-      dyAxis("y", label = metric_legend, axisLabelWidth = 40) %>%
+      dyAxis("y", axisLabelWidth = 60) %>%
       dyAxis("x", drawGrid = FALSE) %>%
       dySeries(metric()$id, label = metric_legend, color = "rgba(41,190,216,1)") %>%
       dySeries(metric_change_key, label = diff_label, color = "rgba(248,216,77,0.95)") %>%

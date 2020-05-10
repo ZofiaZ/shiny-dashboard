@@ -72,6 +72,7 @@
   align-items: center;
   min-height: rem(20px);
   position: relative;
+  font-size: rem(16px);
 
   .userTabbed &:focus-within {
     border-color: $blue;

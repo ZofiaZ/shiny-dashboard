@@ -28,33 +28,35 @@
   <main class="page-main-content">
     <section class="page-section">
       <div class="tile tile-metricSummary sales">
-        {{ salesSummary }}
         <div class="icon">
           <span class="material-icons">
             add_shopping_cart
           </span>
         </div>
+        {{ salesSummary }}
       </div>
       <div class="tile tile-metricSummary production">
-        {{ productionSummary }}
         <div class="icon">
           <span class="material-icons">
             business
           </span>
         </div>
+        {{ productionSummary }}
       </div>
       <div class="tile tile-metricSummary users">
-        {{ usersSummary }}
         <div class="icon"><span class="material-icons">
             person_outline
           </span>
         </div>
+        {{ usersSummary }}
       </div>
       <div class="tile tile-metricSummary complaints">
-        {{ complaintsSummary }}
-        <div class="icon"><span class="material-icons">
+        <div class="icon">
+          <span class="material-icons">
             mail_outline
-          </span></div>
+          </span>
+        </div>
+        {{ complaintsSummary }}
       </div>
     </section>
     <section class="page-section">

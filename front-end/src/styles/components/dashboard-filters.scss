@@ -1,18 +1,27 @@
-$breakInline: $breakSm;
-
 .dashboard-filters {
   display: flex;
   flex-wrap: wrap;
 
+  @include mediaFrom($breakLg) {
+    justify-content: flex-end;
+  }
+
   label {
     font-weight: 500;
 
-    @include mediaFrom($breakInline) {
+    @include mediaFrom($breakSm) {
       margin-right: $spacingSm;
     }
   }
+
   .time-selection {
     display: flex;
+    margin-bottom: rem($spacingMd);
+    width: 100%;
+
+    @include mediaFrom($breakSm) {
+      width: auto;
+    }
 
     .form-group {
       @include gridWidth(6/12);
@@ -22,7 +31,7 @@ $breakInline: $breakSm;
       margin-right: $spacingMd;
       width: auto;
 
-      @include mediaFrom($breakInline) {
+      @include mediaFrom($breakSm) {
         flex-direction: row;
         align-items: center;
       }
@@ -34,8 +43,11 @@ $breakInline: $breakSm;
         select {
           padding-left: rem(10px);
           padding-right: rem(30px);
-          font-size: rem(12px);
           text-transform: none;
+
+          @include mediaFrom($breakSm) {
+            font-size: rem(12px);
+          }
         }
       }
     }
@@ -43,36 +55,32 @@ $breakInline: $breakSm;
     label {
       margin-bottom: rem(5px);
 
-      @include mediaFrom($breakInline) {
+      @include mediaFrom($breakSm) {
         margin-bottom: 0;
       }
     }
   }
 
   .comparison {
-    margin-top: 10px;
     width: 100%;
+    margin-bottom: rem($spacingMd);
 
-    @include mediaFrom($breakInline) {
+    @include mediaFrom($breakSm) {
       display: flex;
       align-items: center;
       width: auto;
     }
 
-    @include mediaFrom($breakMd) {
-      margin: 0;
-    }
-
     label {
       display: block;
-      margin-top: rem(5px);
+      margin-bottom: rem($spacingSm);
 
       @include mediaFrom($breakSm) {
         display: inline;
       }
 
       @include mediaFrom($breakMd) {
-        margin-top: 0;
+        margin-bottom: 0;
       }
     }
 
@@ -87,7 +95,7 @@ $breakInline: $breakSm;
     .shiny-options-group {
       margin-top: 0;
 
-      @include mediaFrom($breakInline) {
+      @include mediaFrom($breakSm) {
         display: inline-block;
       }
     }
