@@ -9,9 +9,9 @@
 - nice to have: custom time selection (date picker)
 
 ## UX & UI improvements:
+- (!) add `loaders` and disable selectors while there are pending requests
 - `map` - display countries values up front (not as a tooltip visible only on hover)
 - `map` - create a better color pallette that is not dependent on data fluctuations
-- add `loaders` (!)
 - format large numbers
 - `time chart` - consider changing bars to line chart and display current & previous values (instead of diff value)
 - `time chart` - improve hover look & feel and interaction
@@ -20,6 +20,7 @@
 - use different colors for metrics from different groups (for example: blue for sales data, green for users data, red for complaints)
 
 ## Technical:
+- (!) investigate & improve performance
 - learn about `data structures` in R & organize data in a better way
 - prevent errors & handle edge cases
 - separate `data processing` (for example: calculating change values with normalization based on number of days) from `sample data generation` script. Create data processing functions that operate on vectors (avoid multiple mapply). Add data processing to app (outside server function call).
@@ -29,4 +30,5 @@
 
 ## Bugfixing
 - add support for IE11 and Edge
+- disable touchpad gestures on leaflet map, as there are some open issues regarding this
 - test with screen readers, fix accessibility issues, add meaningful aria tags
