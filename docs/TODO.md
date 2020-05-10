@@ -18,6 +18,7 @@
 - `time filters` - change previous time range radio buttons look & feel to nicer button switch
 - `all charts` - recalculate charts height based on viewport height (would be nice to fill all vertical space on large screens)
 - use different colors for metrics from different groups (for example: blue for sales data, green for users data, red for complaints)
+- add a tooltip with information how previous values and percentage increase/decrease has been calculated
 
 ## Technical:
 - (!) investigate & improve performance
@@ -28,7 +29,7 @@
 - learn about different libraries in R and include them more conciously in the app :)
 - add tests
 
-## Bugfixing
+## Bugfixing:
 - add support for IE11 and Edge
 - disable touchpad gestures on leaflet map, as there are some open issues regarding this
 - test with screen readers, fix accessibility issues, add meaningful aria tags
