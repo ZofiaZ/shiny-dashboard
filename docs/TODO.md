@@ -1,5 +1,5 @@
 ## Functionalities:
-- `map` - add change to previous time range per country (percantage)
+- `map` - add percentage increase/decrease (change to previous year/month) to the metric per country map
 - create 3d chart (for example: metrics by product type)
 - add ability to enlarge charts (view full screen)
 - add export and print functionalities
@@ -11,7 +11,7 @@
 ## UX & UI improvements:
 - `map` - display countries values up front (not as a tooltip visible only on hover)
 - `map` - create a better color pallette that is not dependent on data fluctuations
-- add `loaders`
+- add `loaders` (!)
 - format large numbers
 - `time chart` - consider changing bars to line chart and display current & previous values (instead of diff value)
 - `time chart` - improve hover look & feel and interaction
