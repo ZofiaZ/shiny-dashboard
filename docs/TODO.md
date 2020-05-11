@@ -30,7 +30,7 @@
 - add tests
 
 ## Bugfixing:
-- (!) disable switching to future month (from for example from December 2019 to December 2020)
+- (!) disable switching to future month (for example from December 2019 to December 2020)
 - fix long names dropdown display on 320px devices
 - add support for IE11 and Edge
 - disable touchpad gestures on leaflet map, as there are some open issues regarding this
