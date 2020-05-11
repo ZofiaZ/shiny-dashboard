@@ -30,6 +30,7 @@
 - add tests
 
 ## Bugfixing:
+- disable switching to future month (from for example from December 2019 to December 2020)
 - add support for IE11 and Edge
 - disable touchpad gestures on leaflet map, as there are some open issues regarding this
 - test with screen readers, fix accessibility issues, add meaningful aria tags
