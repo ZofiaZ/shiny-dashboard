@@ -6,8 +6,13 @@
 4. For not completed months, or months with different number of days the percentage increase/decrease might be misleading. For example comparing current, not completed month with previous month would often show a decrease. Therefore it makes sense to normalize previous values based on the number of days. I used formula `prev_value_normalized = prev_value * no_of_days_in_selected_period / no_of_days_in_previous_period`
 5. Each user may want to have different metrics selected by default and would benefit from selected metrics being `saved in local storage` and restored next time the app is opened.
 6. Client needs the export and print functionalities but will use it rarely (therefore it can be added later and it could be hidden behind some "more" action icon).
-7. Client wants to add more metrics in the future. Design needs to be `scalable` and easily accomodate a few new metrics. (Please note that if a lot of them needs to be added, they should be grouped into multiple dashboards in separate tabs)
-8. Clients sells products just in 6 markets at the moment (countries displayed on the map)
+7. Metrics that the client uses can be grouped into 4 logical categories:
+- **sales metrics**: revenue, profit, number of orders
+- **production metrics**: production costs, number of produced items
+- **users-related metrics**: active users, users that dropped out from sales process
+- **complaints metrics**: opened complaints, closed complaints
+8. Client wants to add more metrics in the future. Design needs to be `scalable` and easily accomodate a few new metrics. (Please note that if a lot of them needs to be added, they should be grouped into multiple dashboards in separate tabs/pages)
+9. Clients sells products just in 6 markets at the moment (countries displayed on the map)
 
 Additional assumption: I was considering for a while displaying a decrease in metrics such as `complaints` in green and increase in red (as decrease in this case is a desired state). However I have doubts if this helps in reading the summary data or rather introduces more cognitive dissonance. The code that changes the CSS class in such cases is implemented, however I intentionally left the colors consistent in all scenarios for the time being (so all values below zero are red and above - green).
 
