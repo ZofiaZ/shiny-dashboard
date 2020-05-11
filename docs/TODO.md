@@ -10,7 +10,7 @@
 
 ## UX & UI improvements:
 - (!) add `loaders` and disable selectors while there are pending requests
-- `map` - display countries values up front (not as a tooltip visible only on hover)
+- (!) `map` - display countries values up front (not as a tooltip visible only on hover)
 - `map` - create a better color pallette that is not dependent on data fluctuations
 - format large numbers
 - `time chart` - consider changing bars to line chart and display current & previous values (instead of diff value)
@@ -30,7 +30,7 @@
 - add tests
 
 ## Bugfixing:
-- disable switching to future month (from for example from December 2019 to December 2020)
+- (!) disable switching to future month (from for example from December 2019 to December 2020)
 - fix long names dropdown display on 320px devices
 - add support for IE11 and Edge
 - disable touchpad gestures on leaflet map, as there are some open issues regarding this
